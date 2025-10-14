@@ -31,13 +31,19 @@ npm run preview
 
 ## 🚢 Deployment
 
-Deploy to GitHub Pages:
+Deploy to GitHub Pages from the main branch:
 
 ```bash
-npm run deploy
+# Build the project
+npm run build
+
+# Commit and push to main
+git add docs/
+git commit -m "Update build"
+git push origin main
 ```
 
-This will automatically build the project and deploy to the `gh-pages` branch.
+The site is built to the `docs/` folder and served directly from the main branch.
 
 ## 📝 Features
 

@@ -1,14 +1,33 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import { readFileSync, writeFileSync } from 'fs'
+import { join } from 'path'
+
+// Plugin to remove crossorigin attribute from HTML for GitHub Pages compatibility
+function removeCrossorigin() {
+  return {
+    name: 'remove-crossorigin',
+    closeBundle() {
+      const htmlPath = join(__dirname, 'dist', 'index.html')
+      try {
+        let html = readFileSync(htmlPath, 'utf-8')
+        // Remove crossorigin attribute from script and link tags
+        html = html.replace(/\s+crossorigin/g, '')
+        writeFileSync(htmlPath, html, 'utf-8')
+      } catch (error) {
+        console.warn('Could not modify HTML file:', error)
+      }
+    },
+  }
+}
 
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
-  plugins: [react()],
+  plugins: [react(), removeCrossorigin()],
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
-    // Ensure proper MIME types for GitHub Pages
     rollupOptions: {
       output: {
         // Ensure proper file extensions for GitHub Pages

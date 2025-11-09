@@ -34,14 +34,26 @@ jobs:
       - name: Build
         run: npm run build
       
-      - name: Add .nojekyll file
-        run: touch dist/.nojekyll
+      - name: Ensure .nojekyll file exists
+        run: |
+          if [ ! -f dist/.nojekyll ]; then
+            touch dist/.nojekyll
+          fi
+      
+      - name: Verify build output
+        run: |
+          echo "Build output structure:"
+          ls -la dist/
+          echo "JavaScript files:"
+          ls -lh dist/assets/*.js || true
+          echo "Verifying .nojekyll exists:"
+          test -f dist/.nojekyll && echo ".nojekyll file found" || echo "ERROR: .nojekyll file missing"
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: './dist'
 

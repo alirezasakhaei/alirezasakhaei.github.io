@@ -1,0 +1,75 @@
+import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap } from 'react-icons/fa'
+
+interface NavigationProps {
+  activeSection: string
+  mobileMenuOpen: boolean
+  setMobileMenuOpen: (open: boolean) => void
+  scrollToSection: (id: string) => void
+}
+
+const navItems = [
+  { id: 'home', label: 'Home', icon: FaHome },
+  { id: 'education', label: 'Education', icon: FaGraduationCap },
+  { id: 'experience', label: 'Experience', icon: FaBriefcase },
+  { id: 'publications', label: 'Publications', icon: FaFileAlt },
+  { id: 'contact', label: 'Contact', icon: FaEnvelope }
+]
+
+export default function Navigation({ activeSection, mobileMenuOpen, setMobileMenuOpen, scrollToSection }: NavigationProps) {
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md shadow-sm">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Alireza Sakhaei
+          </div>
+
+          {/* Desktop Menu */}
+          <div className="hidden md:flex space-x-8">
+            {navItems.map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
+                  activeSection === id
+                    ? 'text-blue-600 bg-blue-50'
+                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white border-t">
+          <div className="px-4 py-4 space-y-2">
+            {navItems.map(({ id, label, icon: Icon }) => (
+              <button
+                key={id}
+                onClick={() => scrollToSection(id)}
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 text-left"
+              >
+                <Icon />
+                <span>{label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </nav>
+  )
+}
+

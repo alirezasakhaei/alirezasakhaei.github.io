@@ -30,7 +30,7 @@ export const experiences: Experience[] = [
     location: 'Remote',
     period: 'Jul 2025 - Present',
     description: [
-      'Working on an AI powered prediction market platform built on Solana. I\'ve been building various AI systems using LangChain and LangGraph, from simple ones to more complex setups. Also built the Django backend that handles all the AI and data services. One of the more interesting projects has been developing a market making system that does high frequency trading. It\'s pretty fascinating watching these algorithms make decisions in milliseconds.'
+      'Working on an AI powered prediction market platform built on Solana. I\'ve been building various AI systems using LangChain and LangGraph, from simple ones to more complex setups with RAG. Also built the Django backend that handles all the AI and data services. One of the more interesting projects has been developing a market making system that does high frequency trading. It\'s pretty fascinating watching these algorithms make decisions in milliseconds.'
     ]
   },
   {
@@ -132,7 +132,7 @@ export const interests: Interest[] = [
   {
     emoji: '🧠',
     title: 'AI Reasoning & Agentic Systems',
-    description: 'Studying how AI systems reason and make decisions. Exploring chain of thought mechanisms, multi agent architectures, and how to build systems that can break down complex problems autonomously'
+    description: 'Studying how AI systems reason and make decisions. Exploring chain of thought mechanisms, RAG, multi agent architectures, and how to build systems that can break down complex problems autonomously'
   },
   {
     emoji: '🎮',

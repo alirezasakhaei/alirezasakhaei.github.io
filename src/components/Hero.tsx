@@ -17,7 +17,7 @@ export default function Hero() {
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
           className="relative"
         >
-          <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-blue-400 via-purple-400 to-pink-400 p-1 shadow-2xl">
+          <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-orange-400 via-red-400 to-pink-400 p-1 shadow-2xl">
             <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
               {/* Replace this div with <img src="your-photo.jpg" alt="Profile" className="w-full h-full object-cover" /> */}
               <FaUser className="w-16 h-16 sm:w-20 sm:h-20 text-gray-300" />
@@ -26,7 +26,7 @@ export default function Hero() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            className="absolute -inset-2 rounded-full bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 opacity-20 blur-xl -z-10"
+            className="absolute -inset-2 rounded-full bg-gradient-to-r from-orange-400 via-red-400 to-pink-400 opacity-20 blur-xl -z-10"
           />
         </motion.div>
 
@@ -35,7 +35,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-2 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent leading-tight"
+            className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-2 bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent leading-tight"
           >
             {personalInfo.name}
           </motion.h1>
@@ -66,7 +66,7 @@ export default function Hero() {
       >
         <a
           href={socialLinks.email}
-          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base"
+          className="flex items-center gap-2 px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-all shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base"
         >
           <FaEnvelope />
           <span>Get in Touch</span>

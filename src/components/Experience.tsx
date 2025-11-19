@@ -30,7 +30,7 @@ export default function Experience({ experiences }: ExperienceProps) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent"
           >
             Work Experience
           </motion.h2>
@@ -49,7 +49,7 @@ export default function Experience({ experiences }: ExperienceProps) {
           {/* Animated Timeline Line */}
           <div className="absolute left-6 sm:left-8 lg:left-1/2 top-0 bottom-0 w-0.5 bg-gray-200 overflow-hidden">
             <motion.div
-              className="absolute top-0 left-0 w-full bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500"
+              className="absolute top-0 left-0 w-full bg-gradient-to-b from-orange-500 via-red-500 to-pink-500"
               style={{
                 height: `${timelineProgress}%`,
                 transition: 'height 0.3s ease-out'
@@ -87,10 +87,10 @@ export default function Experience({ experiences }: ExperienceProps) {
                       damping: 15
                     }}
                     whileHover={{ scale: 1.3 }}
-                    className="absolute left-4 sm:left-6 lg:left-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-blue-600 rounded-full border-4 border-white shadow-lg transform -translate-x-1/2 z-10 cursor-pointer"
+                    className="absolute left-4 sm:left-6 lg:left-1/2 w-3 h-3 sm:w-4 sm:h-4 bg-orange-600 rounded-full border-4 border-white shadow-lg transform -translate-x-1/2 z-10 cursor-pointer"
                   >
                     <motion.div
-                      className="absolute inset-0 bg-blue-400 rounded-full"
+                      className="absolute inset-0 bg-orange-400 rounded-full"
                       animate={{
                         scale: [1, 1.5, 1],
                         opacity: [0.5, 0, 0.5]
@@ -125,11 +125,11 @@ export default function Experience({ experiences }: ExperienceProps) {
                         y: -8,
                         transition: { duration: 0.3 }
                       }}
-                      className="bg-gradient-to-br from-white to-blue-50 rounded-xl p-5 sm:p-6 shadow-lg hover:shadow-2xl transition-all w-full border border-transparent hover:border-blue-200 relative overflow-hidden group"
+                      className="bg-gradient-to-br from-white to-orange-50 rounded-xl p-5 sm:p-6 shadow-lg hover:shadow-2xl transition-all w-full border border-transparent hover:border-orange-200 relative overflow-hidden group"
                     >
                       {/* Animated background gradient */}
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-br from-blue-100/0 to-purple-100/0 group-hover:from-blue-100/20 group-hover:to-purple-100/20 transition-all duration-500"
+                        className="absolute inset-0 bg-gradient-to-br from-orange-100/0 to-pink-100/0 group-hover:from-orange-100/20 group-hover:to-pink-100/20 transition-all duration-500"
                         initial={false}
                       />
                       
@@ -154,7 +154,7 @@ export default function Experience({ experiences }: ExperienceProps) {
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: index * 0.15 + 0.5 }}
-                          className="text-lg sm:text-xl text-blue-600 font-semibold mb-2"
+                          className="text-lg sm:text-xl text-orange-600 font-semibold mb-2"
                         >
                           {exp.company}
                         </motion.p>
@@ -191,7 +191,7 @@ export default function Experience({ experiences }: ExperienceProps) {
                               className={`flex items-start gap-2 ${isEven ? 'lg:flex-row-reverse lg:justify-end' : 'lg:justify-start'} group/item`}
                             >
                               <motion.span
-                                className="text-blue-600 mt-1 flex-shrink-0"
+                                className="text-orange-600 mt-1 flex-shrink-0"
                                 animate={{
                                   scale: [1, 1.2, 1],
                                   rotate: [0, 180, 360]

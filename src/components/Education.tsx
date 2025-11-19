@@ -8,7 +8,7 @@ interface EducationProps {
 
 export default function Education({ education }: EducationProps) {
   return (
-    <section id="education" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-purple-50 via-pink-50 to-indigo-50">
+    <section id="education" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-50 via-red-50 to-pink-50">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -24,9 +24,9 @@ export default function Education({ education }: EducationProps) {
             transition={{ type: 'spring', stiffness: 200, delay: 0.1 }}
             className="inline-block mb-4"
           >
-            <FaGraduationCap className="text-5xl sm:text-6xl text-purple-600" />
+            <FaGraduationCap className="text-5xl sm:text-6xl text-orange-600" />
           </motion.div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
             Education
           </h2>
           <p className="text-gray-700 text-base sm:text-lg">
@@ -51,7 +51,7 @@ export default function Education({ education }: EducationProps) {
                   whileInView={{ scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ type: 'spring', stiffness: 200, delay: index * 0.1 + 0.2 }}
-                  className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl shadow-lg flex-shrink-0"
+                  className="p-3 bg-gradient-to-br from-orange-500 to-pink-500 rounded-xl shadow-lg flex-shrink-0"
                 >
                   <FaGraduationCap className="w-6 h-6 text-white" />
                 </motion.div>
@@ -59,7 +59,7 @@ export default function Education({ education }: EducationProps) {
                   <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-1">
                     {edu.degree} in {edu.field}
                   </h3>
-                  <p className="text-lg text-purple-600 font-semibold">
+                  <p className="text-lg text-orange-600 font-semibold">
                     {edu.institution}
                   </p>
                 </div>
@@ -67,11 +67,11 @@ export default function Education({ education }: EducationProps) {
 
               <div className="space-y-2 mb-4">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <FaMapMarkerAlt className="text-purple-500 flex-shrink-0" />
+                  <FaMapMarkerAlt className="text-orange-500 flex-shrink-0" />
                   <span>{edu.location}</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm text-gray-600">
-                  <FaCalendar className="text-purple-500 flex-shrink-0" />
+                  <FaCalendar className="text-orange-500 flex-shrink-0" />
                   <span>{edu.period}</span>
                 </div>
               </div>
@@ -82,7 +82,7 @@ export default function Education({ education }: EducationProps) {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 + 0.3 }}
-                  className="inline-block px-4 py-2 bg-gradient-to-r from-purple-100 to-pink-100 text-purple-700 rounded-lg text-sm font-semibold mb-4"
+                  className="inline-block px-4 py-2 bg-gradient-to-r from-orange-100 to-pink-100 text-orange-700 rounded-lg text-sm font-semibold mb-4"
                 >
                   GPA: {edu.gpa}
                 </motion.div>

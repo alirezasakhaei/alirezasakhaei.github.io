@@ -1,4 +1,5 @@
 import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap, FaLinkedin, FaGithub, FaGoogle, FaUniversity } from 'react-icons/fa'
+import { motion } from 'framer-motion'
 import { socialLinks } from '../data'
 
 interface NavigationProps {
@@ -29,7 +30,7 @@ export default function Navigation({ activeSection, mobileMenuOpen, setMobileMen
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-6">
-            <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
               Alireza Sakhaei
             </div>
 

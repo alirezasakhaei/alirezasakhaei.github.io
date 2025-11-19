@@ -16,7 +16,7 @@ export default function Honors({ honors }: HonorsProps) {
       className="bg-white/70 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-lg hover:shadow-xl transition-shadow"
     >
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-3 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-xl">
+        <div className="p-3 bg-gradient-to-br from-orange-400 to-pink-500 rounded-xl">
           <FaTrophy className="w-6 h-6 text-white" />
         </div>
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800">Honors & Awards</h2>
@@ -30,7 +30,7 @@ export default function Honors({ honors }: HonorsProps) {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-yellow-50 to-orange-50 hover:from-yellow-100 hover:to-orange-100 transition-all"
+            className="flex items-start gap-4 p-4 rounded-xl bg-gradient-to-r from-orange-50 to-pink-50 hover:from-orange-100 hover:to-pink-100 transition-all"
           >
             <div className="flex-1">
               <h3 className="text-lg font-semibold text-gray-800 mb-1">

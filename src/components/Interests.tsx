@@ -25,15 +25,6 @@ export default function Interests({ interests }: InterestsProps) {
           >
             What I Love Working On
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-gray-600 text-base sm:text-lg"
-          >
-            My interests and areas of passion
-          </motion.p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">

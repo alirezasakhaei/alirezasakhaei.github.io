@@ -34,15 +34,6 @@ export default function Experience({ experiences }: ExperienceProps) {
           >
             Work Experience
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="text-gray-600 text-base sm:text-lg"
-          >
-            My professional journey
-          </motion.p>
         </motion.div>
 
         <div className="relative max-w-5xl mx-auto">

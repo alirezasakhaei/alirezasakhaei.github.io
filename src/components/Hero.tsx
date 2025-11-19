@@ -17,7 +17,7 @@ export default function Hero() {
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
           className="relative"
         >
-          <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-orange-400 via-red-400 to-pink-400 p-1 shadow-2xl">
+          <div className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-full bg-gradient-to-br from-orange-400 via-red-400 to-pink-400 p-1 shadow-2xl">
             <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
               {/* Replace this div with <img src="your-photo.jpg" alt="Profile" className="w-full h-full object-cover" /> */}
               <img src="/me.jpeg" alt="Alireza Sakhaeirad" className="w-full h-full object-cover" />

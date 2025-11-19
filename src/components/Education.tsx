@@ -29,9 +29,6 @@ export default function Education({ education }: EducationProps) {
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
             Education
           </h2>
-          <p className="text-gray-700 text-base sm:text-lg">
-            Academic Background
-          </p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-5xl mx-auto">

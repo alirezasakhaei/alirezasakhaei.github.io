@@ -2,12 +2,16 @@ import type { NewsItem, Experience, Education, Publication, SocialLinks, Honor, 
 
 export const honors: Honor[] = [
   {
-    title: 'Ranked 1st in Iran University Entrance Exam (Konkur)',
+    title: 'Ranked 2nd in Electrical Engineering Class at Sharif University',
+    description: 'Out of 165 students'
+  },
+  {
+    title: 'Ranked 1st in Iran University Entrance Exam (Konkur) in 150K participants',
     year: '2019'
   },
   {
-    title: 'Ranked 2nd in Electrical Engineering Class at Sharif University',
-    description: 'Out of 165 students'
+    title: 'Was Born! (not very funny I know)',
+    description: '2001 February 26th'
   }
 ]
 
@@ -30,7 +34,7 @@ export const experiences: Experience[] = [
     ]
   },
   {
-    title: 'SRE and AI Developer',
+    title: 'Software and AI Engineer',
     company: 'Rastar Co',
     location: 'Tehran, Iran',
     period: 'Jan 2025 - Jul 2025',
@@ -39,7 +43,7 @@ export const experiences: Experience[] = [
     ]
   },
   {
-    title: 'Algorithmic Trader, Classic and AI',
+    title: 'Algorithmic Trader',
     company: 'Azhman Investment Co',
     location: 'Tehran, Iran',
     period: 'Jan 2024 - Dec 2024',
@@ -54,6 +58,15 @@ export const experiences: Experience[] = [
     period: 'Jul 2023 - Sep 2023',
     description: [
       'Worked on fine tuning large language models (up to 70B parameters) for specific domains. Studied how LLMs could be used in education and healthcare, looking at both what works and what doesn\'t. Experimented with different prompting techniques like few shot learning and chain of thought reasoning. Got to work with researchers from different backgrounds, which taught me a lot about how people from different fields approach AI problems. This experience really got me interested in doing more research.'
+    ]
+  },
+  {
+    title: 'Math Tutor',
+    company: 'Self Employed',
+    location: 'Remote',
+    period: '2019 - 2022',
+    description: [
+      'Taught geometry and calculus to high school students preparing for university entrance exams.'
     ]
   }
 ]
@@ -145,7 +158,7 @@ export const interests: Interest[] = [
 
 export const personalInfo = {
   name: 'Alireza Sakhaeirad',
-  title: 'MSc of Electrical Engineering at EPFL · AI Engineer',
+  title: 'MSc of AI at EPFL · AI Engineer',
   bio: 'At 6 I wanted to be an astronaut, at 12 an athlete, at 15 a poet, at 17 a mathematition, but turned out an AI engineer and software developer :)  I still enjoy poems, work out regularly (lately got interested in parkour). My native language is Persian, Im fluent in English, and I consider myself A2 in French (but Im A1 tbh). I also speak a little bit of Spanish. Got something cool in mind? Text me!'
 }
 

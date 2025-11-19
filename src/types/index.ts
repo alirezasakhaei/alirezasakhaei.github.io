@@ -35,6 +35,12 @@ export interface Publication {
   }
 }
 
+export interface Honor {
+  title: string
+  year?: string
+  description?: string
+}
+
 export interface SocialLinks {
   email: string
   epfl: string

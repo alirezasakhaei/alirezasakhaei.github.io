@@ -1,6 +1,6 @@
 import Hero from './Hero'
-import News from './News'
-import { newsItems } from '../data'
+import Honors from './Honors'
+import { honors } from '../data'
 
 export default function Home() {
   return (
@@ -8,7 +8,7 @@ export default function Home() {
       <div className="max-w-7xl mx-auto w-full">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start lg:items-center">
           <Hero />
-          <News newsItems={newsItems} />
+          <Honors honors={honors} />
         </div>
       </div>
     </section>

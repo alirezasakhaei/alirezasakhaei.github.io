@@ -1,4 +1,5 @@
-import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap } from 'react-icons/fa'
+import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap, FaLinkedin, FaGithub, FaGoogle, FaUniversity } from 'react-icons/fa'
+import { socialLinks } from '../data'
 
 interface NavigationProps {
   activeSection: string
@@ -15,13 +16,38 @@ const navItems = [
   { id: 'contact', label: 'Contact', icon: FaEnvelope }
 ]
 
+const socialIcons = [
+  { href: socialLinks.linkedin, icon: FaLinkedin, label: 'LinkedIn', color: 'hover:text-blue-600' },
+  { href: socialLinks.github, icon: FaGithub, label: 'GitHub', color: 'hover:text-gray-800' },
+  { href: socialLinks.scholar, icon: FaGoogle, label: 'Google Scholar', color: 'hover:text-red-600' },
+  { href: socialLinks.epfl, icon: FaUniversity, label: 'EPFL', color: 'hover:text-purple-600' }
+]
+
 export default function Navigation({ activeSection, mobileMenuOpen, setMobileMenuOpen, scrollToSection }: NavigationProps) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Alireza Sakhaei
+          <div className="flex items-center gap-6">
+            <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Alireza Sakhaei
+            </div>
+
+            {/* Social Links - Desktop */}
+            <div className="hidden lg:flex items-center gap-3">
+              {socialIcons.map(({ href, icon: Icon, label, color }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`text-gray-600 ${color} transition-colors`}
+                  aria-label={label}
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Desktop Menu */}

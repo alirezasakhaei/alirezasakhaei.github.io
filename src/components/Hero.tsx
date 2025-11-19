@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FaEnvelope, FaGithub, FaUser } from 'react-icons/fa'
+import { FaEnvelope, FaGithub, FaUser, FaTelegramPlane } from 'react-icons/fa'
 import { personalInfo, socialLinks } from '../data'
 
 export default function Hero() {
@@ -20,7 +20,7 @@ export default function Hero() {
           <div className="w-32 h-32 sm:w-40 sm:h-40 rounded-full bg-gradient-to-br from-orange-400 via-red-400 to-pink-400 p-1 shadow-2xl">
             <div className="w-full h-full rounded-full bg-white flex items-center justify-center overflow-hidden">
               {/* Replace this div with <img src="your-photo.jpg" alt="Profile" className="w-full h-full object-cover" /> */}
-              <FaUser className="w-16 h-16 sm:w-20 sm:h-20 text-gray-300" />
+              <img src="/me.jpeg" alt="Alireza Sakhaeirad" className="w-full h-full object-cover" />
             </div>
           </div>
           <motion.div
@@ -66,10 +66,19 @@ export default function Hero() {
       >
         <a
           href={socialLinks.email}
-          className="flex items-center gap-2 px-6 py-3 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-all shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base"
+          className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base"
         >
           <FaEnvelope />
-          <span>Get in Touch</span>
+          <span>Email</span>
+        </a>
+        <a
+          href={socialLinks.telegram}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all shadow-lg hover:shadow-xl hover:scale-105 text-sm sm:text-base"
+        >
+          <FaTelegramPlane />
+          <span>Telegram</span>
         </a>
         <a
           href={socialLinks.github}

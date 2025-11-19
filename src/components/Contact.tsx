@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FaEnvelope, FaLinkedin, FaGithub, FaHome } from 'react-icons/fa'
+import { FaEnvelope, FaLinkedin, FaGithub, FaHome, FaTwitter } from 'react-icons/fa'
 import { SiGooglescholar } from 'react-icons/si'
 import type { SocialLinks } from '../types'
 
@@ -12,7 +12,8 @@ const contactItems = [
   { icon: FaHome, label: 'EPFL', href: (links: SocialLinks) => links.epfl, color: 'from-red-500 to-red-600' },
   { icon: FaLinkedin, label: 'LinkedIn', href: (links: SocialLinks) => links.linkedin, color: 'from-blue-700 to-blue-800' },
   { icon: SiGooglescholar, label: 'Scholar', href: (links: SocialLinks) => links.scholar, color: 'from-blue-400 to-blue-500' },
-  { icon: FaGithub, label: 'GitHub', href: (links: SocialLinks) => links.github, color: 'from-gray-700 to-gray-800' }
+  { icon: FaGithub, label: 'GitHub', href: (links: SocialLinks) => links.github, color: 'from-gray-700 to-gray-800' },
+  { icon: FaTwitter, label: 'Twitter', href: (links: SocialLinks) => links.X, color: 'from-black to-gray-800' }
 ]
 
 export default function Contact({ socialLinks }: ContactProps) {
@@ -25,7 +26,7 @@ export default function Contact({ socialLinks }: ContactProps) {
           viewport={{ once: true }}
           className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
             Get in Touch
           </h2>
           <p className="text-gray-600 text-base sm:text-lg">Let's connect and collaborate</p>

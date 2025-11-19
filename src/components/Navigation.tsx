@@ -1,5 +1,4 @@
-import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap, FaLinkedin, FaGithub, FaGoogle, FaUniversity } from 'react-icons/fa'
-import { motion } from 'framer-motion'
+import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap, FaLinkedin, FaGithub, FaGoogle, FaUniversity, FaHeart } from 'react-icons/fa'
 import { socialLinks } from '../data'
 
 interface NavigationProps {
@@ -12,6 +11,7 @@ interface NavigationProps {
 const navItems = [
   { id: 'home', label: 'Home', icon: FaHome },
   { id: 'education', label: 'Education', icon: FaGraduationCap },
+  { id: 'interests', label: 'Interests', icon: FaHeart },
   { id: 'experience', label: 'Experience', icon: FaBriefcase },
   { id: 'publications', label: 'Publications', icon: FaFileAlt },
   { id: 'contact', label: 'Contact', icon: FaEnvelope }

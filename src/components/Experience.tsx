@@ -103,7 +103,7 @@ export default function Experience({ experiences }: ExperienceProps) {
                     />
                   </motion.div>
 
-                  {/* Content Card - Left Side for Even, Right Side for Odd */}
+                  {/* Content Card - Alternating Position, Left-Aligned Text */}
                   <motion.div
                     initial={{ opacity: 0, x: isEven ? -100 : 100 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -115,9 +115,9 @@ export default function Experience({ experiences }: ExperienceProps) {
                       stiffness: 100
                     }}
                     className={`flex-1 ml-12 sm:ml-16 lg:ml-0 ${
-                      isEven 
-                        ? 'lg:mr-auto lg:pr-8 lg:max-w-md lg:text-right' 
-                        : 'lg:ml-auto lg:pl-8 lg:max-w-md lg:text-left'
+                      isEven
+                        ? 'lg:mr-auto lg:pr-8 lg:max-w-md'
+                        : 'lg:ml-auto lg:pl-8 lg:max-w-md'
                     }`}
                   >
                     <motion.div
@@ -139,7 +139,7 @@ export default function Experience({ experiences }: ExperienceProps) {
                         initial={false}
                       />
 
-                      <div className={`relative z-10 flex flex-col ${isEven ? 'lg:items-end' : 'lg:items-start'}`}>
+                      <div className="relative z-10 flex flex-col items-start">
                         <motion.h3
                           initial={{ opacity: 0, y: 10 }}
                           whileInView={{ opacity: 1, y: 0 }}
@@ -176,11 +176,11 @@ export default function Experience({ experiences }: ExperienceProps) {
                         >
                           {exp.period}
                         </motion.p>
-                        <ul className={`space-y-2 text-sm sm:text-base text-gray-700 w-full ${isEven ? 'lg:text-right' : 'lg:text-left'}`}>
+                        <ul className="space-y-2 text-sm sm:text-base text-gray-700 w-full text-left">
                           {exp.description.map((item, i) => (
                             <motion.li
                               key={i}
-                              initial={{ opacity: 0, x: isEven ? 20 : -20 }}
+                              initial={{ opacity: 0, x: -20 }}
                               whileInView={{ opacity: 1, x: 0 }}
                               viewport={{ once: true }}
                               transition={{
@@ -188,7 +188,7 @@ export default function Experience({ experiences }: ExperienceProps) {
                                 type: 'spring',
                                 stiffness: 100
                               }}
-                              className={`flex items-start gap-2 ${isEven ? 'lg:flex-row-reverse lg:justify-end' : 'lg:justify-start'} group/item`}
+                              className="flex items-start gap-2 justify-start group/item"
                             >
                               <motion.span
                                 className="text-orange-600 mt-1 flex-shrink-0"

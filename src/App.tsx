@@ -3,11 +3,12 @@ import Navigation from './components/Navigation'
 import ProgressBar from './components/ProgressBar'
 import Home from './components/Home'
 import Education from './components/Education'
+import Interests from './components/Interests'
 import Experience from './components/Experience'
 import Publications from './components/Publications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
-import { education, experiences, publications, socialLinks } from './data'
+import { education, interests, experiences, publications, socialLinks } from './data'
 import './App.css'
 
 function App() {
@@ -16,7 +17,7 @@ function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['home', 'education', 'experience', 'publications', 'contact']
+      const sections = ['home', 'education', 'interests', 'experience', 'publications', 'contact']
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -56,6 +57,7 @@ function App() {
 
       <Home />
       <Education education={education} />
+      <Interests interests={interests} />
       <Experience experiences={experiences} />
       <Publications publications={publications} />
       <Contact socialLinks={socialLinks} />

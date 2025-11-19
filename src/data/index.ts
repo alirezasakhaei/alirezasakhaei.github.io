@@ -1,4 +1,4 @@
-import type { NewsItem, Experience, Education, Publication, SocialLinks, Honor } from '../types'
+import type { NewsItem, Experience, Education, Publication, SocialLinks, Honor, Interest } from '../types'
 
 export const honors: Honor[] = [
   {
@@ -12,7 +12,11 @@ export const honors: Honor[] = [
 ]
 
 export const newsItems: NewsItem[] = [
-  // News items to be added later
+  {
+    date: '2025-09-01',
+    title: 'Started my Master\'s degree at EPFL!',
+    description: ''
+  }
 ]
 
 export const experiences: Experience[] = [
@@ -22,7 +26,7 @@ export const experiences: Experience[] = [
     location: 'Remote',
     period: 'Jul 2025 - Present',
     description: [
-      // Details to be added
+      'Working on an AI powered prediction market platform built on Solana. I\'ve been building various AI systems using LangChain and LangGraph, from simple ones to more complex setups. Also built the Django backend that handles all the AI and data services. One of the more interesting projects has been developing a market making system that does high frequency trading. It\'s pretty fascinating watching these algorithms make decisions in milliseconds.'
     ]
   },
   {
@@ -31,16 +35,16 @@ export const experiences: Experience[] = [
     location: 'Tehran, Iran',
     period: 'Jan 2025 - Jul 2025',
     description: [
-      // Details to be added
+      'Built backends for online games using Django and FastAPI, with Redis for caching and Celery for handling async tasks. Led a small team, did sprint planning, code reviews, and helped junior developers learn and grow. Also handled server infrastructure, deployment pipelines, and keeping systems running smoothly. Added some AI features to the games, which was a fun challenge combining backend work with machine learning.'
     ]
   },
   {
-    title: 'Algorithmic Trader - Classic and AI',
+    title: 'Algorithmic Trader, Classic and AI',
     company: 'Azhman Investment Co',
     location: 'Tehran, Iran',
     period: 'Jan 2024 - Dec 2024',
     description: [
-      // Details to be added
+      'Built high frequency trading algorithms for the Iranian stock market and crypto. Worked with different strategies like statistical arbitrage, spread trading, and market making. Also developed AI powered trading systems that use machine learning to predict prices and generate signals. Spent a lot of time optimizing execution to reduce slippage and manage risk across different assets. Every millisecond counts in this kind of work.'
     ]
   },
   {
@@ -49,34 +53,42 @@ export const experiences: Experience[] = [
     location: 'Switzerland',
     period: 'Jul 2023 - Sep 2023',
     description: [
-      // Details to be added
+      'Worked on fine tuning large language models (up to 70B parameters) for specific domains. Studied how LLMs could be used in education and healthcare, looking at both what works and what doesn\'t. Experimented with different prompting techniques like few shot learning and chain of thought reasoning. Got to work with researchers from different backgrounds, which taught me a lot about how people from different fields approach AI problems. This experience really got me interested in doing more research.'
     ]
   }
 ]
 
 export const publications: Publication[] = [
   {
-    title: 'Paper One',
-    authors: 'Details to be added',
-    venue: 'To be added',
-    year: 'TBA',
-    links: {}
+    title: 'Meditron 70b: Scaling medical pretraining for large language models',
+    authors: 'Zeming Chen, Alejandro Hernández Cano, Angelika Romanou, Antoine Bonnet, Kyle Matoba, Francesco Salvi, Matteo Pagliardini, Simin Fan, Andreas Köpf, Amirkeivan Mohtashami, Alexandre Sallinen, Alireza Sakhaeirad, et al.',
+    venue: 'arXiv preprint',
+    year: '2023',
+    citations: '515 citations',
+    links: {
+      arxiv: 'https://arxiv.org/pdf/2311.16079'
+    }
   },
   {
-    title: 'Paper Two',
-    authors: 'Details to be added',
-    venue: 'To be added',
-    year: 'TBA',
-    links: {}
+    title: 'Could ChatGPT get an engineering degree? Evaluating higher education vulnerability to AI assistants',
+    authors: 'Beatriz Borges, Negar Foroutan, Deniz Bayazit, Anna Sotnikova, Syrielle Montariol, Tanya Nazaretzky, Mohammadreza Banaei, Alireza Sakhaeirad, Philippe Servant, Seyed Parsa Neshaei, et al.',
+    venue: 'Proceedings of the National Academy of Sciences (PNAS)',
+    year: '2024',
+    citations: '23 citations',
+    links: {
+      pdf: 'https://www.pnas.org/doi/full/10.1073/pnas.2414955121'
+    }
   }
 ]
 
 export const socialLinks: SocialLinks = {
   email: 'mailto:alirezasakhaeirad@gmail.com',
-  epfl: 'https://people.epfl.ch/alireza.sakhaei',
+  epfl: 'https://people.epfl.ch/alireza.sakhaeirad',
   linkedin: 'https://linkedin.com/in/alireza-sakhaei-899800205',
   scholar: 'https://scholar.google.com/citations?user=pYhjrV4AAAAJ',
-  github: 'https://github.com/Alireza-Sampour'
+  github: 'https://github.com/Alirezasakhaei',
+  X: 'https://X.com/Alireza_skhr',
+  telegram: 'https://t.me/Alirezasakhaei'
 }
 
 export const education: Education[] = [
@@ -98,9 +110,42 @@ export const education: Education[] = [
   }
 ]
 
+export const interests: Interest[] = [
+  {
+    emoji: '🤖',
+    title: 'LLM Scaling & Optimization',
+    description: 'Researching efficient ways to scale language models and optimize their performance under resource constraints. Interested in parameter efficient fine tuning, quantization, and inference optimization techniques'
+  },
+  {
+    emoji: '🧠',
+    title: 'AI Reasoning & Agentic Systems',
+    description: 'Studying how AI systems reason and make decisions. Exploring chain of thought mechanisms, multi agent architectures, and how to build systems that can break down complex problems autonomously'
+  },
+  {
+    emoji: '🎮',
+    title: 'Reinforcement Learning',
+    description: 'Studying how agents learn through interaction with environments. Interested in policy optimization, multi agent RL, and how reinforcement learning can be combined with language models for complex decision making'
+  },
+  {
+    emoji: '⚙️',
+    title: 'Intelligent Automation',
+    description: 'Exploring how AI can automate complex workflows and decision making processes. From automating data pipelines to building systems that can handle multi step tasks with minimal human intervention'
+  },
+  {
+    emoji: '📊',
+    title: 'AI for Financial Markets',
+    description: 'Researching algorithmic trading strategies and market microstructure. Interested in how machine learning can be applied to price prediction, risk management, and automated trading systems'
+  },
+  {
+    emoji: '⚡',
+    title: 'Efficient ML Systems',
+    description: 'Studying GPU architectures, distributed training, and how to make ML systems faster and more efficient. Interested in the intersection of hardware and software optimization for AI workloads'
+  }
+]
+
 export const personalInfo = {
   name: 'Alireza Sakhaeirad',
-  title: 'Electrical Engineering Student · AI Enthusiast',
-  bio: 'I am an Electrical Engineering student at EPFL specializing in AI. My interests include machine learning, natural language processing, and algorithmic trading. I enjoy working on challenging problems at the intersection of theory and practice.'
+  title: 'MSc of Electrical Engineering at EPFL · AI Engineer',
+  bio: 'At 6 I wanted to be an astronaut, at 12 an athlete, at 15 a poet, at 17 a mathematition, but turned out an AI engineer and software developer :)  I still enjoy poems, work out regularly (lately got interested in parkour). My native language is Persian, Im fluent in English, and I consider myself A2 in French (but Im A1 tbh). I also speak a little bit of Spanish. Got something cool in mind? Text me!'
 }
 

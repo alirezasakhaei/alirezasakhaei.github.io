@@ -28,6 +28,7 @@ export interface Publication {
   authors: string
   venue: string
   year: string
+  citations?: string
   links?: {
     pdf?: string
     arxiv?: string
@@ -47,4 +48,12 @@ export interface SocialLinks {
   linkedin: string
   scholar: string
   github: string
+  X: string
+  telegram: string
+}
+
+export interface Interest {
+  emoji: string
+  title: string
+  description: string
 }

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { FaEnvelope, FaGithub, FaUser, FaTelegramPlane } from 'react-icons/fa'
+import { FaEnvelope, FaGithub, FaTelegramPlane } from 'react-icons/fa'
 import { personalInfo, socialLinks } from '../data'
 
 export default function Hero() {

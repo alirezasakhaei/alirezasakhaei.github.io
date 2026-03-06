@@ -9,10 +9,6 @@ export const honors: Honor[] = [
     title: 'Ranked 1st in Iran University Entrance Exam (Konkur) in 150K participants',
     year: '2019'
   },
-  {
-    title: 'Was Born! (not very funny I know)',
-    description: '2001 February 26th'
-  }
 ]
 
 export const newsItems: NewsItem[] = [
@@ -91,6 +87,21 @@ export const publications: Publication[] = [
     links: {
       pdf: 'https://www.pnas.org/doi/full/10.1073/pnas.2414955121'
     }
+  },
+  {
+    title: 'Unmasking the Factual-Conceptual Gap in Persian Language Models',
+    authors: 'Alireza Sakhaeirad, Ali Ma\'manpoosh, Arshia Hemmat',
+    venue: 'SilkroadNLP Workshop at EACL',
+    year: '2026',
+    links: {
+      arxiv: 'https://arxiv.org/abs/2602.17623'
+    }
+  },
+  {
+    title: 'CriteriaPO: Criteria Preference Optimization from Fine-Grained AI Feedback',
+    authors: 'Beatriz Borges, Alireza Sakhaeirad, Silin Gao, Syrielle Montariol, Antoine Bosselut',
+    venue: 'ICML Submission',
+    year: '2026'
   }
 ]
 

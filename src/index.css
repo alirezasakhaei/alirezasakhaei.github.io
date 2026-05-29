@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+/* Custom palette: #f7b267 #f79d65 #f4845f #f27059 #f25c54 (warm amber -> coral)
+   Remaps the existing orange/pink/purple/red/blue Tailwind tokens so the whole
+   site picks up the new colors without editing every component class.
+   To re-theme the site later, just change the hex values below. */
+@theme {
+  --color-orange-50: #fef5ec;
+  --color-orange-100: #fde9d7;
+  --color-orange-200: #fbd2af;
+  --color-orange-300: #f7b267;
+  --color-orange-400: #f79d65;
+  --color-orange-500: #f4845f;
+  --color-orange-600: #f27059;
+  --color-orange-700: #e2473f;
+  --color-orange-800: #c43a33;
+  --color-orange-900: #9e2d28;
+
+  --color-pink-50: #fef2ef;
+  --color-pink-100: #fde0d9;
+  --color-pink-200: #fac2b5;
+  --color-pink-300: #f4845f;
+  --color-pink-400: #f27059;
+  --color-pink-500: #f25c54;
+  --color-pink-600: #e2473f;
+  --color-pink-700: #c43a33;
+  --color-pink-800: #9e2d28;
+
+  --color-purple-300: #f7b267;
+  --color-purple-400: #f79d65;
+  --color-purple-500: #f4845f;
+  --color-purple-600: #f27059;
+  --color-purple-700: #f25c54;
+
+  /* gradient middles / accents remapped into the palette */
+  --color-red-50: #fef2ef;
+  --color-red-100: #fde0d9;
+  --color-red-200: #fac2b5;
+  --color-red-400: #f4845f;
+  --color-red-500: #f27059;
+  --color-red-600: #f25c54;
+  --color-red-700: #d83c34;
+
+  --color-blue-50: #fef5ec;
+  --color-blue-400: #f7b267;
+  --color-blue-500: #f79d65;
+  --color-blue-600: #f4845f;
+  --color-blue-700: #f27059;
+  --color-blue-800: #f25c54;
+}

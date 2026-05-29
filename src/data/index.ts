@@ -13,6 +13,11 @@ export const honors: Honor[] = [
 
 export const newsItems: NewsItem[] = [
   {
+    date: '2026-01-01',
+    title: 'Joined Schole AI as an AI Engineer!',
+    description: ''
+  },
+  {
     date: '2025-09-01',
     title: 'Started my Master\'s degree at EPFL!',
     description: ''
@@ -21,10 +26,19 @@ export const newsItems: NewsItem[] = [
 
 export const experiences: Experience[] = [
   {
+    title: 'AI Engineer',
+    company: 'Schole AI',
+    location: 'Lausanne, Switzerland',
+    period: 'Jan 2026 - Present',
+    description: [
+      'Building document processing infrastructure that handles messy real world files at scale, from ingestion pipelines to AI powered analysis. I work across the stack here: designing backend systems for large scale document storage and retrieval, wiring up multi modal AI models for understanding, classification, and content extraction, and building the frontend interfaces that let people actually use all of it. It\'s a fun mix of research-y AI work and solid engineering.'
+    ]
+  },
+  {
     title: 'Backend and AI Engineer',
     company: 'Worm',
     location: 'Remote',
-    period: 'Jul 2025 - Present',
+    period: 'Jul 2025 - Jan 2026',
     description: [
       'Working on an AI powered prediction market platform built on Solana. I\'ve been building various AI systems using LangChain and LangGraph, from simple ones to more complex setups with RAG. Also built the Django backend that handles all the AI and data services. One of the more interesting projects has been developing a market making system that does high frequency trading. It\'s pretty fascinating watching these algorithms make decisions in milliseconds.'
     ]
@@ -89,7 +103,7 @@ export const publications: Publication[] = [
     }
   },
   {
-    title: 'Unmasking the Factual-Conceptual Gap in Persian Language Models',
+    title: 'Beyond Pattern Matching: Evaluating Cultural Conceptual Reasoning in Persian Language Models',
     authors: 'Alireza Sakhaeirad, Ali Ma\'manpoosh, Arshia Hemmat',
     venue: 'SilkroadNLP Workshop at EACL',
     year: '2026',
@@ -122,7 +136,7 @@ export const education: Education[] = [
     institution: 'EPFL',
     location: 'Lausanne, Switzerland',
     period: '2025 - Present',
-    description: 'Specialization in Artificial Intelligence'
+    description: 'Specialization in Artificial Intelligence · Minor in Data Science'
   },
   {
     degree: 'B.Sc.',
@@ -169,7 +183,7 @@ export const interests: Interest[] = [
 
 export const personalInfo = {
   name: 'Alireza Sakhaeirad',
-  title: 'MSc of AI at EPFL · AI Engineer',
+  title: 'AI & Full-Stack Engineer · MSc of AI at EPFL',
   bio: 'At 6 I wanted to be an astronaut, at 12 an athlete, at 15 a poet, at 17 a mathematition, but turned out an AI engineer and software developer :)  I still enjoy poems, work out regularly (lately got interested in parkour). My native language is Persian, Im fluent in English, and I consider myself A2 in French (but Im A1 tbh). I also speak a little bit of Spanish. Got something cool in mind? Text me!'
 }
 

@@ -30,8 +30,8 @@ export default function Navigation({ activeSection, mobileMenuOpen, setMobileMen
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center gap-6">
-            <div className="text-xl sm:text-2xl font-bold bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
-              Alireza Sakhaei
+            <div className="text-xl sm:text-2xl font-bold whitespace-nowrap bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent block md:hidden lg:block">
+              Alireza Sakhaeirad
             </div>
 
             {/* Social Links - Desktop */}
@@ -64,7 +64,7 @@ export default function Navigation({ activeSection, mobileMenuOpen, setMobileMen
                 }`}
               >
                 <Icon className="w-4 h-4" />
-                <span>{label}</span>
+                <span className="hidden lg:inline">{label}</span>
               </button>
             ))}
           </div>

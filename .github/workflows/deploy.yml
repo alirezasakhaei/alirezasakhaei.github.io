@@ -1,4 +1,7 @@
-name: Deploy to GitHub Pages
+name: Deploy GitHub Pages redirect
+
+# The canonical site now lives at https://sakha.wtf (deployed on Railway).
+# GitHub Pages only serves a redirect to it, so old alirezasakhaei.github.io links keep working.
 
 on:
   push:
@@ -19,48 +22,41 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'npm'
-      
-      - name: Install dependencies
-        run: npm ci
-      
-      - name: Build
-        run: npm run build
-      
-      - name: Ensure .nojekyll file exists
+      - name: Generate redirect site
         run: |
-          # Ensure .nojekyll exists in dist (Vite should copy it from public, but ensure it's there)
-          touch dist/.nojekyll
-          echo ".nojekyll file ensured in dist/"
-      
-      - name: Verify build output
-        run: |
-          echo "Build output structure:"
-          ls -la dist/
-          echo ""
-          echo "JavaScript files:"
-          ls -lh dist/assets/*.js || true
-          echo ""
-          echo "Verifying .nojekyll exists:"
-          test -f dist/.nojekyll && echo "✓ .nojekyll file found" || echo "✗ ERROR: .nojekyll file missing"
-          echo ""
-          echo "Verifying file types:"
-          file dist/assets/*.js || true
-      
+          mkdir -p _site
+          cat > _site/index.html <<'HTML'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8" />
+              <meta name="viewport" content="width=device-width, initial-scale=1" />
+              <title>Redirecting to sakha.wtf</title>
+              <link rel="canonical" href="https://sakha.wtf/" />
+              <meta http-equiv="refresh" content="0; url=https://sakha.wtf/" />
+              <script>
+                window.location.replace("https://sakha.wtf/" + window.location.hash);
+              </script>
+              <style>
+                body { font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; }
+                a { color: #2563eb; }
+              </style>
+            </head>
+            <body>
+              <p>This site has moved to <a href="https://sakha.wtf/">sakha.wtf</a>. Redirecting…</p>
+            </body>
+          </html>
+          HTML
+          cp _site/index.html _site/404.html
+          touch _site/.nojekyll
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
-      
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './dist'
+          path: './_site'
 
   deploy:
     environment:

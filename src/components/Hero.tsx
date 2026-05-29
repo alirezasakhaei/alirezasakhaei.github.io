@@ -10,7 +10,7 @@ export default function Hero() {
       transition={{ duration: 0.6 }}
       className="w-full"
     >
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-8">
+      <div className="flex flex-col sm:flex-row items-center sm:items-center gap-6 mb-8">
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -30,7 +30,7 @@ export default function Hero() {
           />
         </motion.div>
 
-        <div className="flex-1">
+        <div className="flex-1 text-center sm:text-left">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -54,7 +54,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.5 }}
-        className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed max-w-2xl"
+        className="text-base sm:text-lg text-gray-600 mb-8 leading-relaxed max-w-2xl text-center sm:text-left mx-auto sm:mx-0"
       >
         {personalInfo.bio}
       </motion.p>
@@ -62,7 +62,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="flex flex-wrap gap-4"
+        className="flex flex-wrap gap-4 justify-center sm:justify-start"
       >
         <a
           href={socialLinks.email}

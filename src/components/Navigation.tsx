@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from 'framer-motion'
 import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap, FaLinkedin, FaGithub, FaGoogle, FaUniversity, FaHeart } from 'react-icons/fa'
 import { socialLinks } from '../data'
 
@@ -71,31 +72,49 @@ export default function Navigation({ activeSection, mobileMenuOpen, setMobileMen
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-gray-700"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+            <motion.span
+              key={mobileMenuOpen ? 'close' : 'open'}
+              initial={{ rotate: -90, opacity: 0 }}
+              animate={{ rotate: 0, opacity: 1 }}
+              transition={{ duration: 0.2 }}
+              className="block"
+            >
+              {mobileMenuOpen ? <FaTimes /> : <FaBars />}
+            </motion.span>
           </button>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-t">
-          <div className="px-4 py-4 space-y-2">
-            {navItems.map(({ id, label, icon: Icon }) => (
-              <button
-                key={id}
-                onClick={() => scrollToSection(id)}
-                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 text-left"
-              >
-                <Icon />
-                <span>{label}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
+      <AnimatePresence initial={false}>
+        {mobileMenuOpen && (
+          <motion.div
+            key="mobile-menu"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
+            className="md:hidden bg-white border-t overflow-hidden"
+          >
+            <div className="px-4 py-4 space-y-2">
+              {navItems.map(({ id, label, icon: Icon }) => (
+                <button
+                  key={id}
+                  onClick={() => scrollToSection(id)}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 text-left"
+                >
+                  <Icon />
+                  <span>{label}</span>
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   )
 }

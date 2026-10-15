@@ -1,6 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap, FaLinkedin, FaGithub, FaGoogle, FaUniversity, FaHeart } from 'react-icons/fa'
-import { socialLinks } from '../data'
+import { FaBars, FaTimes } from 'react-icons/fa'
 
 interface NavigationProps {
   activeSection: string
@@ -10,112 +8,67 @@ interface NavigationProps {
 }
 
 const navItems = [
-  { id: 'home', label: 'Home', icon: FaHome },
-  { id: 'education', label: 'Education', icon: FaGraduationCap },
-  { id: 'interests', label: 'Interests', icon: FaHeart },
-  { id: 'experience', label: 'Experience', icon: FaBriefcase },
-  { id: 'publications', label: 'Publications', icon: FaFileAlt },
-  { id: 'contact', label: 'Contact', icon: FaEnvelope }
-]
-
-const socialIcons = [
-  { href: socialLinks.linkedin, icon: FaLinkedin, label: 'LinkedIn', color: 'hover:text-blue-600' },
-  { href: socialLinks.github, icon: FaGithub, label: 'GitHub', color: 'hover:text-gray-800' },
-  { href: socialLinks.scholar, icon: FaGoogle, label: 'Google Scholar', color: 'hover:text-red-600' },
-  { href: socialLinks.epfl, icon: FaUniversity, label: 'EPFL', color: 'hover:text-purple-600' }
+  { id: 'education', label: 'Education' },
+  { id: 'interests', label: 'Interests' },
+  { id: 'experience', label: 'Work' },
+  { id: 'publications', label: 'Papers' },
+  { id: 'contact', label: 'Contact' },
 ]
 
 export default function Navigation({ activeSection, mobileMenuOpen, setMobileMenuOpen, scrollToSection }: NavigationProps) {
   return (
-    <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <div className="flex items-center gap-6">
-            <div className="text-xl sm:text-2xl font-bold whitespace-nowrap bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent block md:hidden lg:block">
-              Alireza Sakhaeirad
-            </div>
+    <nav className="fixed top-0 left-0 right-0 z-40 bg-paper border-b-2 border-ink">
+      <div className="px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto h-14 flex justify-between items-center">
+          <button onClick={() => scrollToSection('home')} className="font-mono font-semibold text-base tracking-tight">
+            sakha<span className="text-coral">.</span>wtf
+          </button>
 
-            {/* Social Links - Desktop */}
-            <div className="hidden lg:flex items-center gap-3">
-              {socialIcons.map(({ href, icon: Icon, label, color }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={`text-gray-600 ${color} transition-colors`}
-                  aria-label={label}
-                >
-                  <Icon className="w-5 h-5" />
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map(({ id, label, icon: Icon }) => (
+          <div className="hidden md:flex items-center gap-1 font-mono text-sm">
+            {navItems.map(({ id, label }) => (
               <button
                 key={id}
                 onClick={() => scrollToSection(id)}
-                className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all ${
-                  activeSection === id
-                    ? 'text-blue-600 bg-blue-50'
-                    : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
-                }`}
+                className={`px-3 py-1.5 transition-colors ${activeSection === id ? 'bg-ink text-paper' : 'hover:bg-paper-2'}`}
               >
-                <Icon className="w-4 h-4" />
-                <span className="hidden lg:inline">{label}</span>
+                {label}
               </button>
             ))}
+            <a
+              href="/movies"
+              className="ml-2 px-3 py-1.5 border-2 border-ink bg-coral font-semibold shadow-hard hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
+            >
+              Movies
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-gray-700"
+            className="md:hidden p-2 -mr-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
-            <motion.span
-              key={mobileMenuOpen ? 'close' : 'open'}
-              initial={{ rotate: -90, opacity: 0 }}
-              animate={{ rotate: 0, opacity: 1 }}
-              transition={{ duration: 0.2 }}
-              className="block"
-            >
-              {mobileMenuOpen ? <FaTimes /> : <FaBars />}
-            </motion.span>
+            {mobileMenuOpen ? <FaTimes /> : <FaBars />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence initial={false}>
-        {mobileMenuOpen && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.28, ease: [0.4, 0, 0.2, 1] }}
-            className="md:hidden bg-white border-t overflow-hidden"
-          >
-            <div className="px-4 py-4 space-y-2">
-              {navItems.map(({ id, label, icon: Icon }) => (
-                <button
-                  key={id}
-                  onClick={() => scrollToSection(id)}
-                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 text-left"
-                >
-                  <Icon />
-                  <span>{label}</span>
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {mobileMenuOpen && (
+        <div className="md:hidden border-t-2 border-ink font-mono">
+          {navItems.map(({ id, label }) => (
+            <button
+              key={id}
+              onClick={() => scrollToSection(id)}
+              className="w-full text-left px-4 py-3.5 border-b border-ink/15 hover:bg-paper-2"
+            >
+              {label}
+            </button>
+          ))}
+          <a href="/movies" className="block px-4 py-3.5 bg-coral font-semibold">
+            Movies →
+          </a>
+        </div>
+      )}
     </nav>
   )
 }
-

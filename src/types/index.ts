@@ -37,6 +37,7 @@ export interface Publication {
 }
 
 export interface Honor {
+  stat?: string
   title: string
   year?: string
   description?: string
@@ -53,7 +54,36 @@ export interface SocialLinks {
 }
 
 export interface Interest {
-  emoji: string
+  emoji?: string
   title: string
   description: string
+}
+
+export interface DiaryEntry {
+  id: string
+  title: string
+  year: number | null
+  watchedDate: string
+  rating: number | null
+  liked: boolean
+  rewatch: boolean
+  review: string | null
+  poster: string | null
+  url: string
+}
+
+export interface WatchlistFilm {
+  slug: string
+  title: string
+  year: number | null
+  poster: string | null
+  url: string
+}
+
+export interface DiaryResponse {
+  username: string
+  profile: string
+  entries: DiaryEntry[]
+  // null when the watchlist page couldn't be read
+  watchlist: WatchlistFilm[] | null
 }

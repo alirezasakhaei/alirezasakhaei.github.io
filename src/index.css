@@ -1,50 +1,58 @@
 @import "tailwindcss";
 
-/* Custom palette: #f7b267 #f79d65 #f4845f #f27059 #f25c54 (warm amber -> coral)
-   Remaps the existing orange/pink/purple/red/blue Tailwind tokens so the whole
-   site picks up the new colors without editing every component class.
-   To re-theme the site later, just change the hex values below. */
+/* sakha.wtf palette: warm paper, near-black ink, one solid coral.
+   Flat colors only, square corners, 2px rules, hard offset shadows. */
 @theme {
-  --color-orange-50: #fef5ec;
-  --color-orange-100: #fde9d7;
-  --color-orange-200: #fbd2af;
-  --color-orange-300: #f7b267;
-  --color-orange-400: #f79d65;
-  --color-orange-500: #f4845f;
-  --color-orange-600: #f27059;
-  --color-orange-700: #e2473f;
-  --color-orange-800: #c43a33;
-  --color-orange-900: #9e2d28;
+  --color-paper: #f4efe6;
+  --color-paper-2: #ebe4d6;
+  --color-ink: #161513;
+  --color-mute: #5e584e;
+  --color-coral: #f25c54;
+  --color-coral-dark: #d8433b;
+  --color-amber: #f7b267;
 
-  --color-pink-50: #fef2ef;
-  --color-pink-100: #fde0d9;
-  --color-pink-200: #fac2b5;
-  --color-pink-300: #f4845f;
-  --color-pink-400: #f27059;
-  --color-pink-500: #f25c54;
-  --color-pink-600: #e2473f;
-  --color-pink-700: #c43a33;
-  --color-pink-800: #9e2d28;
+  --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-purple-300: #f7b267;
-  --color-purple-400: #f79d65;
-  --color-purple-500: #f4845f;
-  --color-purple-600: #f27059;
-  --color-purple-700: #f25c54;
+  --animate-view-in: view-in 220ms cubic-bezier(0.2, 0, 0, 1);
 
-  /* gradient middles / accents remapped into the palette */
-  --color-red-50: #fef2ef;
-  --color-red-100: #fde0d9;
-  --color-red-200: #fac2b5;
-  --color-red-400: #f4845f;
-  --color-red-500: #f27059;
-  --color-red-600: #f25c54;
-  --color-red-700: #d83c34;
+  @keyframes view-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+}
 
-  --color-blue-50: #fef5ec;
-  --color-blue-400: #f7b267;
-  --color-blue-500: #f79d65;
-  --color-blue-600: #f4845f;
-  --color-blue-700: #f27059;
-  --color-blue-800: #f25c54;
+@media (prefers-reduced-motion: reduce) {
+  .animate-view-in {
+    animation: none;
+  }
+}
+
+@utility shadow-hard {
+  box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+@utility shadow-hard-coral {
+  box-shadow: 6px 6px 0 var(--color-coral);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+
+  body {
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-coral);
+    color: var(--color-paper);
+  }
 }

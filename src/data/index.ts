@@ -2,10 +2,12 @@ import type { NewsItem, Experience, Education, Publication, SocialLinks, Honor, 
 
 export const honors: Honor[] = [
   {
+    stat: '2nd',
     title: 'Ranked 2nd in Electrical Engineering Class at Sharif University',
     description: 'Out of 165 students'
   },
   {
+    stat: '1st',
     title: 'Ranked 1st in Iran University Entrance Exam (Konkur) in 150K participants',
     year: '2019'
   },
@@ -122,7 +124,7 @@ export const publications: Publication[] = [
 export const socialLinks: SocialLinks = {
   email: 'mailto:alirezasakhaeirad@gmail.com',
   epfl: 'https://people.epfl.ch/alireza.sakhaeirad',
-  linkedin: 'https://linkedin.com/in/alireza-sakhaei-899800205',
+  linkedin: 'https://www.linkedin.com/in/alireza-sakhaeirad/',
   scholar: 'https://scholar.google.com/citations?user=pYhjrV4AAAAJ',
   github: 'https://github.com/Alirezasakhaei',
   X: 'https://X.com/Alireza_skhr',
@@ -184,6 +186,14 @@ export const interests: Interest[] = [
 export const personalInfo = {
   name: 'Alireza Sakhaeirad',
   title: 'AI & Full-Stack Engineer · MSc of AI at EPFL',
-  bio: 'At 6 I wanted to be an astronaut, at 12 an athlete, at 15 a poet, at 17 a mathematician, but turned out an AI engineer and software developer :) I still enjoy poems and work out regularly. My native language is Persian, I\'m fluent in English, and I consider myself A2 in French (but I\'m A1 tbh). I also speak a little bit of Spanish. Got something cool in mind? Text me!'
+  // The bio's opening line, typeset in the hero as crossed-out childhood plans.
+  dreams: [
+    { age: 6, what: 'an astronaut' },
+    { age: 12, what: 'an athlete' },
+    { age: 15, what: 'a poet' },
+    { age: 17, what: 'a mathematician' },
+  ],
+  became: 'an AI engineer and software developer :)',
+  bio: 'I still enjoy poems and work out regularly. My native language is Persian, I\'m fluent in English, and I consider myself A2 in French (but I\'m A1 tbh). I also speak a little bit of Spanish. Got something cool in mind? Text me!'
 }
 

@@ -1,74 +1,65 @@
-import { motion } from 'framer-motion'
 import type { Publication } from '../types'
+import { personalInfo } from '../data'
+import Section from './Section'
 
 interface PublicationsProps {
   publications: Publication[]
 }
 
-export default function Publications({ publications }: PublicationsProps) {
+function Authors({ authors }: { authors: string }) {
+  const parts = authors.split(personalInfo.name)
   return (
-    <section id="publications" className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-orange-50 to-pink-50">
-      <div className="max-w-7xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 sm:mb-16"
-        >
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
-            Publications
-          </h2>
-          <p className="text-gray-600 text-base sm:text-lg">Research contributions and papers</p>
-        </motion.div>
-
-        <div className="grid sm:grid-cols-2 gap-6 max-w-6xl mx-auto">
-          {publications.map((pub, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl p-5 sm:p-6 shadow-lg hover:shadow-2xl transition-all hover:-translate-y-1"
-            >
-              <div className="flex items-start justify-between mb-3">
-                <span className="px-3 py-1 bg-orange-100 text-orange-800 rounded-full text-xs sm:text-sm font-semibold">
-                  {pub.venue} {pub.year}
-                </span>
-              </div>
-              <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-2 leading-snug">{pub.title}</h3>
-              <p className="text-xs sm:text-sm text-gray-600 mb-4">{pub.authors}</p>
-              <div className="flex flex-wrap gap-2">
-                {pub.links?.pdf && (
-                  <a
-                    href={pub.links.pdf}
-                    className="px-3 py-1 bg-red-100 text-red-700 rounded-lg text-xs sm:text-sm hover:bg-red-200 transition-colors"
-                  >
-                    PDF
-                  </a>
-                )}
-                {pub.links?.arxiv && (
-                  <a
-                    href={pub.links.arxiv}
-                    className="px-3 py-1 bg-orange-100 text-orange-700 rounded-lg text-xs sm:text-sm hover:bg-orange-200 transition-colors"
-                  >
-                    arXiv
-                  </a>
-                )}
-                {pub.links?.code && (
-                  <a
-                    href={pub.links.code}
-                    className="px-3 py-1 bg-green-100 text-green-700 rounded-lg text-xs sm:text-sm hover:bg-green-200 transition-colors"
-                  >
-                    Code
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <>
+      {parts.map((part, i) => (
+        <span key={i}>
+          {part}
+          {i < parts.length - 1 && <strong className="text-ink font-bold underline decoration-coral decoration-2 underline-offset-2">{personalInfo.name}</strong>}
+        </span>
+      ))}
+    </>
   )
 }
 
+export default function Publications({ publications }: PublicationsProps) {
+  const sorted = [...publications].sort((a, b) => b.year.localeCompare(a.year))
+
+  return (
+    <Section id="publications" index="04" title="Publications" className="bg-paper-2">
+      <ol className="border-b-2 border-ink">
+        {sorted.map((pub, index) => {
+          const links = [
+            ['arXiv', pub.links?.arxiv],
+            ['PDF', pub.links?.pdf],
+            ['Code', pub.links?.code],
+          ].filter((link): link is [string, string] => Boolean(link[1]))
+
+          return (
+            <li key={index} className="grid sm:grid-cols-[4.5rem_1fr] gap-x-6 gap-y-2 py-7 border-t-2 border-ink first:border-t-0 sm:first:pt-0">
+              <div className="font-mono text-3xl sm:text-4xl font-semibold text-coral leading-none">{pub.year}</div>
+              <div>
+                <h3 className="text-xl sm:text-2xl font-bold tracking-tight leading-snug mb-2">{pub.title}</h3>
+                <p className="text-sm text-mute leading-relaxed mb-3">
+                  <Authors authors={pub.authors} />
+                </p>
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="font-mono text-xs uppercase tracking-wide border-2 border-ink px-2 py-0.5">{pub.venue}</span>
+                  {links.map(([label, href]) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs font-semibold uppercase tracking-wide bg-ink text-paper px-2 py-1 hover:bg-coral hover:text-ink transition-colors"
+                    >
+                      {label} ↗
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </li>
+          )
+        })}
+      </ol>
+    </Section>
+  )
+}

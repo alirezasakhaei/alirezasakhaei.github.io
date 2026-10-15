@@ -56,7 +56,7 @@ export default function Movies() {
   return (
     <div className="min-h-screen flex flex-col">
       <nav className="fixed top-0 left-0 right-0 z-40 bg-paper border-b-2 border-ink">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4 font-mono text-sm">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4 font-mono text-sm">
           <a href="/" className="font-semibold text-base tracking-tight">
             sakha<span className="text-coral">.</span>wtf
           </a>
@@ -74,7 +74,8 @@ export default function Movies() {
         </div>
       </nav>
 
-      <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
+      <main className="flex-1 px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
+        <div className="max-w-6xl mx-auto">
         <header className="mb-10">
           <h1 className="text-[clamp(3.5rem,12vw,7rem)] font-extrabold tracking-tighter leading-[0.85] mb-5">
             Movies<span className="text-coral">.</span>
@@ -118,10 +119,11 @@ export default function Movies() {
         {data && entries.length === 0 && <Notice>Nothing logged yet.</Notice>}
 
         {entries.length > 0 && (view === 'list' ? <ListView entries={entries} /> : <CalendarView entries={entries} />)}
+        </div>
       </main>
 
       <footer className="bg-ink text-paper px-4 sm:px-6 lg:px-8 py-8">
-        <div className="max-w-5xl mx-auto flex justify-between gap-4 font-mono text-sm">
+        <div className="max-w-6xl mx-auto flex justify-between gap-4 font-mono text-sm">
           <a href="/" className="hover:text-coral transition-colors">← back home</a>
           <span className="text-paper/60">via Letterboxd</span>
         </div>

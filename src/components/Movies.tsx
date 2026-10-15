@@ -55,22 +55,31 @@ export default function Movies() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-paper border-b-2 border-ink">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4 font-mono text-sm">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-paper border-b-2 border-ink px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto h-14 flex items-center justify-between gap-4 font-mono text-sm">
           <a href="/" className="font-semibold text-base tracking-tight">
             sakha<span className="text-coral">.</span>wtf
           </a>
-          {data && (
+          <div className="flex items-center gap-1">
+            {data && (
+              <a
+                href={data.profile}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Letterboxd profile"
+                className="flex items-center gap-2 px-3 py-1.5 hover:bg-ink hover:text-paper transition-colors"
+              >
+                <SiLetterboxd className="w-4 h-4" />
+                <span className="hidden sm:inline">Letterboxd ↗</span>
+              </a>
+            )}
             <a
-              href={data.profile}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-3 py-1.5 hover:bg-ink hover:text-paper transition-colors"
+              href="/"
+              className="ml-2 px-3 py-1.5 border-2 border-ink bg-coral font-semibold shadow-hard hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all"
             >
-              <SiLetterboxd className="w-4 h-4" />
-              <span>Letterboxd ↗</span>
+              ← Back
             </a>
-          )}
+          </div>
         </div>
       </nav>
 
@@ -93,7 +102,14 @@ export default function Movies() {
         </header>
 
         <div className="flex justify-end mb-6">
-          <div className="inline-flex border-2 border-ink shadow-hard font-mono text-sm" role="tablist" aria-label="View">
+          {/* Equal-width tabs so the ink block can slide exactly one tab over. */}
+          <div className="relative grid grid-cols-2 border-2 border-ink bg-paper shadow-hard font-mono text-sm" role="tablist" aria-label="View">
+            <span
+              aria-hidden
+              className={`absolute inset-y-0 left-0 w-1/2 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
+                view === 'calendar' ? 'translate-x-full' : 'translate-x-0'
+              }`}
+            />
             {([
               ['list', 'List', FaList],
               ['calendar', 'Calendar', FaCalendarAlt],
@@ -103,8 +119,8 @@ export default function Movies() {
                 role="tab"
                 aria-selected={view === id}
                 onClick={() => chooseView(id)}
-                className={`flex items-center gap-2 px-4 py-2 font-semibold transition-colors ${
-                  view === id ? 'bg-ink text-paper' : 'bg-paper hover:bg-paper-2'
+                className={`relative flex items-center justify-center gap-2 px-4 py-2 font-semibold transition-colors duration-300 ${
+                  view === id ? 'text-paper' : 'hover:bg-paper-2'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -118,7 +134,11 @@ export default function Movies() {
         {!data && !error && <Notice>Loading the diary…</Notice>}
         {data && entries.length === 0 && <Notice>Nothing logged yet.</Notice>}
 
-        {entries.length > 0 && (view === 'list' ? <ListView entries={entries} /> : <CalendarView entries={entries} />)}
+        {entries.length > 0 && (
+          <div key={view} className="animate-view-in">
+            {view === 'list' ? <ListView entries={entries} /> : <CalendarView entries={entries} />}
+          </div>
+        )}
         </div>
       </main>
 

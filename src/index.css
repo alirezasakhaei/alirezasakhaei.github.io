@@ -13,6 +13,21 @@
 
   --font-sans: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --animate-view-in: view-in 220ms cubic-bezier(0.2, 0, 0, 1);
+
+  @keyframes view-in {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-view-in {
+    animation: none;
+  }
 }
 
 @utility shadow-hard {

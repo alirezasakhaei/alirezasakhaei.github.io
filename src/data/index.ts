@@ -124,7 +124,7 @@ export const publications: Publication[] = [
 export const socialLinks: SocialLinks = {
   email: 'mailto:alirezasakhaeirad@gmail.com',
   epfl: 'https://people.epfl.ch/alireza.sakhaeirad',
-  linkedin: 'https://linkedin.com/in/alireza-sakhaei-899800205',
+  linkedin: 'https://www.linkedin.com/in/alireza-sakhaeirad/',
   scholar: 'https://scholar.google.com/citations?user=pYhjrV4AAAAJ',
   github: 'https://github.com/Alirezasakhaei',
   X: 'https://X.com/Alireza_skhr',

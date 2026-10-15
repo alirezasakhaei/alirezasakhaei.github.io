@@ -96,48 +96,51 @@ export default function Movies() {
 
       <main className="px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
         <div className="max-w-6xl mx-auto">
-          <header className="mb-10">
+          <header className="mb-8">
             <h1 className="text-[clamp(3.5rem,12vw,7rem)] font-extrabold tracking-tighter leading-[0.85] mb-5">
               Movies<span className="text-coral">.</span>
             </h1>
             <p className="text-lg sm:text-xl max-w-xl">What I've been watching, and what's next, straight from Letterboxd.</p>
+          </header>
 
+          {/* Stats and view tabs share a row on laptops; the tabs drop below on smaller screens. */}
+          <div className="flex flex-col lg:flex-row lg:items-end gap-6 mb-6">
             {entries.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mt-8">
+              <div className="lg:flex-1 grid grid-cols-2 sm:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">
                 <Stat value={entries.length} label="logged" />
                 <Stat value={entries.filter((e) => e.watchedDate.startsWith(thisYear)).length} label={`in ${thisYear}`} />
                 {average != null && <Stat value={average.toFixed(1)} label="avg rating" />}
                 <Stat value={entries.filter((e) => e.liked).length} label="loved" />
               </div>
             )}
-          </header>
 
-          <div className="flex justify-end mb-6">
-            {/* Equal-width tabs so the ink block slides exactly one tab per step. */}
-            <div
-              className="relative grid auto-cols-fr grid-flow-col border-2 border-ink bg-paper shadow-hard font-mono text-sm"
-              role="tablist"
-              aria-label="View"
-            >
-              <span
-                aria-hidden
-                className="absolute inset-y-0 left-0 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
-                style={{ width: `${100 / tabs.length}%`, transform: `translateX(${activeTab * 100}%)` }}
-              />
-              {tabs.map(({ id, label, icon: Icon }) => (
-                <button
-                  key={id}
-                  role="tab"
-                  aria-selected={view === id}
-                  onClick={() => chooseView(id)}
-                  className={`relative flex items-center justify-center gap-2 px-3 sm:px-4 py-2 font-semibold transition-colors duration-300 ${
-                    view === id ? 'text-paper' : 'hover:bg-paper-2'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  {label}
-                </button>
-              ))}
+            <div className="flex justify-end shrink-0">
+              {/* Equal-width tabs so the ink block slides exactly one tab per step. */}
+              <div
+                className="relative grid auto-cols-fr grid-flow-col border-2 border-ink bg-paper shadow-hard font-mono text-sm"
+                role="tablist"
+                aria-label="View"
+              >
+                <span
+                  aria-hidden
+                  className="absolute inset-y-0 left-0 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
+                  style={{ width: `${100 / tabs.length}%`, transform: `translateX(${activeTab * 100}%)` }}
+                />
+                {tabs.map(({ id, label, icon: Icon }) => (
+                  <button
+                    key={id}
+                    role="tab"
+                    aria-selected={view === id}
+                    onClick={() => chooseView(id)}
+                    className={`relative flex items-center justify-center gap-2 px-3 sm:px-4 py-2 font-semibold transition-colors duration-300 ${
+                      view === id ? 'text-paper' : 'hover:bg-paper-2'
+                    }`}
+                  >
+                    <Icon className="w-3.5 h-3.5" />
+                    {label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 

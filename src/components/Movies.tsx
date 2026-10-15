@@ -104,7 +104,7 @@ export default function Movies() {
           </header>
 
           {/* Stats and view tabs share a row on laptops; the tabs drop below on smaller screens. */}
-          <div className="flex flex-col lg:flex-row lg:items-end gap-6 mb-6">
+          <div className="flex flex-col lg:flex-row lg:items-stretch gap-6 mb-6">
             {entries.length > 0 && (
               <div className="lg:flex-1 grid grid-cols-2 sm:grid-cols-4 gap-[2px] bg-ink border-2 border-ink">
                 <Stat value={entries.length} label="logged" />
@@ -117,7 +117,7 @@ export default function Movies() {
             <div className="flex justify-end shrink-0">
               {/* Equal-width tabs so the ink block slides exactly one tab per step. */}
               <div
-                className="relative grid auto-cols-fr grid-flow-col border-2 border-ink bg-paper shadow-hard font-mono text-sm"
+                className="relative grid auto-cols-fr grid-flow-col border-2 border-ink bg-paper shadow-hard font-mono text-sm lg:h-full"
                 role="tablist"
                 aria-label="View"
               >
@@ -132,11 +132,11 @@ export default function Movies() {
                     role="tab"
                     aria-selected={view === id}
                     onClick={() => chooseView(id)}
-                    className={`relative flex items-center justify-center gap-2 px-3 sm:px-4 py-2 font-semibold transition-colors duration-300 ${
+                    className={`relative flex items-center justify-center gap-2 px-3 sm:px-4 py-2 lg:flex-col lg:gap-2.5 lg:px-6 font-semibold transition-colors duration-300 ${
                       view === id ? 'text-paper' : 'hover:bg-paper-2'
                     }`}
                   >
-                    <Icon className="w-3.5 h-3.5" />
+                    <Icon className="w-3.5 h-3.5 lg:w-5 lg:h-5" />
                     {label}
                   </button>
                 ))}

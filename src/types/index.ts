@@ -72,8 +72,18 @@ export interface DiaryEntry {
   url: string
 }
 
+export interface WatchlistFilm {
+  slug: string
+  title: string
+  year: number | null
+  poster: string | null
+  url: string
+}
+
 export interface DiaryResponse {
   username: string
   profile: string
   entries: DiaryEntry[]
+  // null when the watchlist page couldn't be read
+  watchlist: WatchlistFilm[] | null
 }

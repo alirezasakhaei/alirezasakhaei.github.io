@@ -1,10 +1,16 @@
 import { useEffect, useMemo, useState } from 'react'
-import { FaCalendarAlt, FaHeart, FaList, FaRedoAlt } from 'react-icons/fa'
+import { FaBookmark, FaCalendarAlt, FaHeart, FaList, FaRedoAlt } from 'react-icons/fa'
 import { SiLetterboxd } from 'react-icons/si'
-import type { DiaryEntry, DiaryResponse } from '../types'
+import type { DiaryEntry, DiaryResponse, WatchlistFilm } from '../types'
 import { stars } from '../lib/stars'
 
-type View = 'list' | 'calendar'
+type View = 'list' | 'calendar' | 'watchlist'
+
+const TABS = [
+  { id: 'list', label: 'List', icon: FaList },
+  { id: 'calendar', label: 'Calendar', icon: FaCalendarAlt },
+  { id: 'watchlist', label: 'Watchlist', icon: FaBookmark },
+] as const
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
 
@@ -24,7 +30,8 @@ const monthKey = (iso: string) => iso.slice(0, 7)
 const monthLabel = (date: Date) => date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })
 
 function readView(): View {
-  return new URLSearchParams(window.location.search).get('view') === 'calendar' ? 'calendar' : 'list'
+  const view = new URLSearchParams(window.location.search).get('view')
+  return view === 'calendar' || view === 'watchlist' ? view : 'list'
 }
 
 export default function Movies() {
@@ -43,18 +50,22 @@ export default function Movies() {
   const chooseView = (next: View) => {
     setView(next)
     const url = new URL(window.location.href)
-    if (next === 'calendar') url.searchParams.set('view', 'calendar')
-    else url.searchParams.delete('view')
+    if (next === 'list') url.searchParams.delete('view')
+    else url.searchParams.set('view', next)
     window.history.replaceState(null, '', url)
   }
 
   const entries = data?.entries ?? []
+  const watchlist = data?.watchlist ?? null
+  // The Watchlist tab only appears once there's a watchlist to show.
+  const tabs = TABS.filter((tab) => tab.id !== 'watchlist' || watchlist?.length)
+  const activeTab = Math.max(0, tabs.findIndex((tab) => tab.id === view))
   const rated = entries.filter((e) => e.rating != null)
   const average = rated.length ? rated.reduce((sum, e) => sum + (e.rating ?? 0), 0) / rated.length : null
   const thisYear = String(new Date().getFullYear())
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen">
       <nav className="fixed top-0 left-0 right-0 z-40 bg-paper border-b-2 border-ink px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto h-14 flex items-center justify-between gap-4 font-mono text-sm">
           <a href="/" className="font-semibold text-base tracking-tight">
@@ -83,71 +94,71 @@ export default function Movies() {
         </div>
       </nav>
 
-      <main className="flex-1 px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
+      <main className="px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
         <div className="max-w-6xl mx-auto">
-        <header className="mb-10">
-          <h1 className="text-[clamp(3.5rem,12vw,7rem)] font-extrabold tracking-tighter leading-[0.85] mb-5">
-            Movies<span className="text-coral">.</span>
-          </h1>
-          <p className="text-lg sm:text-xl max-w-xl">What I've been watching, straight from my Letterboxd diary.</p>
+          <header className="mb-10">
+            <h1 className="text-[clamp(3.5rem,12vw,7rem)] font-extrabold tracking-tighter leading-[0.85] mb-5">
+              Movies<span className="text-coral">.</span>
+            </h1>
+            <p className="text-lg sm:text-xl max-w-xl">What I've been watching, and what's next, straight from Letterboxd.</p>
 
-          {entries.length > 0 && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mt-8">
-              <Stat value={entries.length} label="logged" />
-              <Stat value={entries.filter((e) => e.watchedDate.startsWith(thisYear)).length} label={`in ${thisYear}`} />
-              {average != null && <Stat value={average.toFixed(1)} label="avg rating" />}
-              <Stat value={entries.filter((e) => e.liked).length} label="loved" />
+            {entries.length > 0 && (
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mt-8">
+                <Stat value={entries.length} label="logged" />
+                <Stat value={entries.filter((e) => e.watchedDate.startsWith(thisYear)).length} label={`in ${thisYear}`} />
+                {average != null && <Stat value={average.toFixed(1)} label="avg rating" />}
+                <Stat value={entries.filter((e) => e.liked).length} label="loved" />
+              </div>
+            )}
+          </header>
+
+          <div className="flex justify-end mb-6">
+            {/* Equal-width tabs so the ink block slides exactly one tab per step. */}
+            <div
+              className="relative grid auto-cols-fr grid-flow-col border-2 border-ink bg-paper shadow-hard font-mono text-sm"
+              role="tablist"
+              aria-label="View"
+            >
+              <span
+                aria-hidden
+                className="absolute inset-y-0 left-0 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none"
+                style={{ width: `${100 / tabs.length}%`, transform: `translateX(${activeTab * 100}%)` }}
+              />
+              {tabs.map(({ id, label, icon: Icon }) => (
+                <button
+                  key={id}
+                  role="tab"
+                  aria-selected={view === id}
+                  onClick={() => chooseView(id)}
+                  className={`relative flex items-center justify-center gap-2 px-3 sm:px-4 py-2 font-semibold transition-colors duration-300 ${
+                    view === id ? 'text-paper' : 'hover:bg-paper-2'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  {label}
+                </button>
+              ))}
             </div>
+          </div>
+
+          {error && <Notice>Couldn't reach Letterboxd right now. Try again in a bit.</Notice>}
+          {!data && !error && <Notice>Loading the diary…</Notice>}
+          {data && entries.length === 0 && <Notice>Nothing logged yet.</Notice>}
+
+          {view === 'watchlist' && watchlist?.length ? (
+            <div key={view} className="animate-view-in">
+              <WatchlistView films={watchlist} />
+            </div>
+          ) : (
+            entries.length > 0 && (
+              <div key={view} className="animate-view-in">
+                {view === 'calendar' ? <CalendarView entries={entries} /> : <ListView entries={entries} />}
+              </div>
+            )
           )}
-        </header>
-
-        <div className="flex justify-end mb-6">
-          {/* Equal-width tabs so the ink block can slide exactly one tab over. */}
-          <div className="relative grid grid-cols-2 border-2 border-ink bg-paper shadow-hard font-mono text-sm" role="tablist" aria-label="View">
-            <span
-              aria-hidden
-              className={`absolute inset-y-0 left-0 w-1/2 bg-ink transition-transform duration-300 ease-[cubic-bezier(0.65,0,0.35,1)] motion-reduce:transition-none ${
-                view === 'calendar' ? 'translate-x-full' : 'translate-x-0'
-              }`}
-            />
-            {([
-              ['list', 'List', FaList],
-              ['calendar', 'Calendar', FaCalendarAlt],
-            ] as const).map(([id, label, Icon]) => (
-              <button
-                key={id}
-                role="tab"
-                aria-selected={view === id}
-                onClick={() => chooseView(id)}
-                className={`relative flex items-center justify-center gap-2 px-4 py-2 font-semibold transition-colors duration-300 ${
-                  view === id ? 'text-paper' : 'hover:bg-paper-2'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                {label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {error && <Notice>Couldn't reach Letterboxd right now. Try again in a bit.</Notice>}
-        {!data && !error && <Notice>Loading the diary…</Notice>}
-        {data && entries.length === 0 && <Notice>Nothing logged yet.</Notice>}
-
-        {entries.length > 0 && (
-          <div key={view} className="animate-view-in">
-            {view === 'list' ? <ListView entries={entries} /> : <CalendarView entries={entries} />}
-          </div>
-        )}
         </div>
       </main>
 
-      <footer className="bg-ink text-paper px-4 sm:px-6 lg:px-8 py-8">
-        <div className="max-w-6xl mx-auto flex justify-between gap-4 font-mono text-sm">
-          <a href="/" className="hover:text-coral transition-colors">← back home</a>
-          <span className="text-paper/60">via Letterboxd</span>
-        </div>
-      </footer>
     </div>
   )
 }
@@ -352,5 +363,36 @@ function CalendarView({ entries }: { entries: DiaryEntry[] }) {
           </section>
         )}
     </div>
+  )
+}
+
+function WatchlistView({ films }: { films: WatchlistFilm[] }) {
+  return (
+    <section className="border-2 border-ink">
+      <h2 className="bg-ink text-paper font-mono text-xs uppercase tracking-wider px-4 py-2 flex justify-between">
+        <span>Up next</span>
+        <span>{films.length}</span>
+      </h2>
+      <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 p-4 sm:p-6">
+        {films.map((film) => (
+          <a key={film.slug} href={film.url} target="_blank" rel="noopener noreferrer" className="group min-w-0">
+            {film.poster ? (
+              <img
+                src={film.poster}
+                alt=""
+                loading="lazy"
+                className="w-full aspect-[2/3] object-cover border-2 border-ink transition-all group-hover:-translate-x-[2px] group-hover:-translate-y-[2px] group-hover:shadow-hard"
+              />
+            ) : (
+              <div className="w-full aspect-[2/3] border-2 border-ink bg-paper-2" />
+            )}
+            <div className="mt-2 font-bold leading-tight text-sm sm:text-base group-hover:underline decoration-coral decoration-2 underline-offset-2">
+              {film.title}
+            </div>
+            {film.year && <div className="font-mono text-xs text-mute">{film.year}</div>}
+          </a>
+        ))}
+      </div>
+    </section>
   )
 }

@@ -1,17 +1,12 @@
 import { useEffect, useMemo, useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FaArrowLeft, FaCalendarAlt, FaChevronLeft, FaChevronRight, FaHeart, FaList, FaRedoAlt } from 'react-icons/fa'
+import { FaCalendarAlt, FaHeart, FaList, FaRedoAlt } from 'react-icons/fa'
 import { SiLetterboxd } from 'react-icons/si'
 import type { DiaryEntry, DiaryResponse } from '../types'
+import { stars } from '../lib/stars'
 
 type View = 'list' | 'calendar'
 
 const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-
-function stars(rating: number | null) {
-  if (rating == null) return ''
-  return '★'.repeat(Math.floor(rating)) + (rating % 1 ? '½' : '')
-}
 
 // Diary dates are plain YYYY-MM-DD; build them as local dates so nothing shifts a day.
 function parseDate(iso: string) {
@@ -59,53 +54,45 @@ export default function Movies() {
   const thisYear = String(new Date().getFullYear())
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-orange-50">
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 backdrop-blur-md shadow-sm">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-          <a href="/" className="flex items-center gap-2 text-gray-700 hover:text-blue-600 transition-colors min-w-0">
-            <FaArrowLeft className="w-4 h-4 shrink-0" />
-            <span className="text-lg sm:text-xl font-bold truncate bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
-              Alireza Sakhaeirad
-            </span>
+    <div className="min-h-screen flex flex-col">
+      <nav className="fixed top-0 left-0 right-0 z-40 bg-paper border-b-2 border-ink">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between gap-4 font-mono text-sm">
+          <a href="/" className="font-semibold text-base tracking-tight">
+            sakha<span className="text-coral">.</span>wtf
           </a>
           {data && (
             <a
               href={data.profile}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition-colors shrink-0"
+              className="flex items-center gap-2 px-3 py-1.5 hover:bg-ink hover:text-paper transition-colors"
             >
-              <SiLetterboxd className="w-5 h-5" />
-              <span className="hidden sm:inline">Letterboxd</span>
+              <SiLetterboxd className="w-4 h-4" />
+              <span>Letterboxd ↗</span>
             </a>
           )}
         </div>
       </nav>
 
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
-        <motion.header
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="mb-8 sm:mb-10"
-        >
-          <h1 className="text-4xl sm:text-5xl font-bold mb-3 bg-gradient-to-r from-orange-600 via-red-600 to-pink-600 bg-clip-text text-transparent">
-            Movies
+      <main className="flex-1 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-16">
+        <header className="mb-10">
+          <h1 className="text-[clamp(3.5rem,12vw,7rem)] font-extrabold tracking-tighter leading-[0.85] mb-5">
+            Movies<span className="text-coral">.</span>
           </h1>
-          <p className="text-gray-600 text-base sm:text-lg">What I've been watching, straight from my Letterboxd diary.</p>
+          <p className="text-lg sm:text-xl max-w-xl">What I've been watching, straight from my Letterboxd diary.</p>
 
           {entries.length > 0 && (
-            <div className="flex flex-wrap gap-3 mt-6">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-[2px] bg-ink border-2 border-ink mt-8">
               <Stat value={entries.length} label="logged" />
               <Stat value={entries.filter((e) => e.watchedDate.startsWith(thisYear)).length} label={`in ${thisYear}`} />
               {average != null && <Stat value={average.toFixed(1)} label="avg rating" />}
               <Stat value={entries.filter((e) => e.liked).length} label="loved" />
             </div>
           )}
-        </motion.header>
+        </header>
 
         <div className="flex justify-end mb-6">
-          <div className="inline-flex bg-white rounded-xl shadow-sm p-1" role="tablist" aria-label="View">
+          <div className="inline-flex border-2 border-ink shadow-hard font-mono text-sm" role="tablist" aria-label="View">
             {([
               ['list', 'List', FaList],
               ['calendar', 'Calendar', FaCalendarAlt],
@@ -115,8 +102,8 @@ export default function Movies() {
                 role="tab"
                 aria-selected={view === id}
                 onClick={() => chooseView(id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  view === id ? 'bg-gradient-to-r from-orange-500 to-pink-500 text-white shadow' : 'text-gray-600 hover:text-blue-600'
+                className={`flex items-center gap-2 px-4 py-2 font-semibold transition-colors ${
+                  view === id ? 'bg-ink text-paper' : 'bg-paper hover:bg-paper-2'
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -132,29 +119,36 @@ export default function Movies() {
 
         {entries.length > 0 && (view === 'list' ? <ListView entries={entries} /> : <CalendarView entries={entries} />)}
       </main>
+
+      <footer className="bg-ink text-paper px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-5xl mx-auto flex justify-between gap-4 font-mono text-sm">
+          <a href="/" className="hover:text-coral transition-colors">← back home</a>
+          <span className="text-paper/60">via Letterboxd</span>
+        </div>
+      </footer>
     </div>
   )
 }
 
 function Stat({ value, label }: { value: number | string; label: string }) {
   return (
-    <div className="bg-white rounded-xl shadow-sm px-4 py-2">
-      <span className="text-xl font-bold text-gray-800">{value}</span>
-      <span className="text-sm text-gray-500 ml-1.5">{label}</span>
+    <div className="bg-paper px-4 py-3">
+      <div className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-none">{value}</div>
+      <div className="font-mono text-xs uppercase tracking-wider text-mute mt-1.5">{label}</div>
     </div>
   )
 }
 
 function Notice({ children }: { children: React.ReactNode }) {
-  return <div className="bg-white rounded-2xl shadow-sm p-8 text-center text-gray-500">{children}</div>
+  return <div className="border-2 border-ink p-8 text-center font-mono text-sm text-mute">{children}</div>
 }
 
 function Badges({ entry }: { entry: DiaryEntry }) {
   return (
     <span className="inline-flex items-center gap-2">
-      {entry.rating != null && <span className="text-orange-500 tracking-wide">{stars(entry.rating)}</span>}
-      {entry.liked && <FaHeart className="w-3.5 h-3.5 text-pink-500" aria-label="Liked" />}
-      {entry.rewatch && <FaRedoAlt className="w-3 h-3 text-gray-400" aria-label="Rewatch" />}
+      {entry.rating != null && <span className="text-coral-dark tracking-wide">{stars(entry.rating)}</span>}
+      {entry.liked && <FaHeart className="w-3.5 h-3.5 text-coral" aria-label="Liked" />}
+      {entry.rewatch && <FaRedoAlt className="w-3 h-3 text-mute" aria-label="Rewatch" />}
     </span>
   )
 }
@@ -166,27 +160,27 @@ function EntryRow({ entry, showDate = true }: { entry: DiaryEntry; showDate?: bo
       href={entry.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex gap-4 p-3 sm:p-4 rounded-xl hover:bg-orange-50 transition-colors"
+      className="group flex gap-4 sm:gap-5 p-4 hover:bg-paper-2 transition-colors"
     >
       {showDate && (
-        <div className="w-10 shrink-0 text-center pt-1">
-          <div className="text-2xl font-bold text-gray-800 leading-none">{date.getDate()}</div>
-          <div className="text-xs text-gray-500 uppercase mt-1">{date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
+        <div className="w-10 shrink-0 pt-0.5">
+          <div className="text-3xl font-extrabold tracking-tight leading-none">{date.getDate()}</div>
+          <div className="font-mono text-[11px] text-mute uppercase mt-1">{date.toLocaleDateString('en-US', { weekday: 'short' })}</div>
         </div>
       )}
       {entry.poster ? (
-        <img src={entry.poster} alt="" loading="lazy" className="w-14 sm:w-16 aspect-[2/3] object-cover rounded-md shadow shrink-0" />
+        <img src={entry.poster} alt="" loading="lazy" className="w-14 sm:w-16 aspect-[2/3] object-cover border-2 border-ink shrink-0" />
       ) : (
-        <div className="w-14 sm:w-16 aspect-[2/3] rounded-md bg-gray-200 shrink-0" />
+        <div className="w-14 sm:w-16 aspect-[2/3] border-2 border-ink bg-paper-2 shrink-0" />
       )}
       <div className="min-w-0 flex-1">
-        <div className="font-semibold text-gray-800">
-          {entry.title} {entry.year && <span className="font-normal text-gray-500">{entry.year}</span>}
+        <div className="text-lg font-bold leading-tight group-hover:underline decoration-coral decoration-2 underline-offset-2">
+          {entry.title} {entry.year && <span className="font-mono text-sm font-normal text-mute">{entry.year}</span>}
         </div>
         <div className="mt-1">
           <Badges entry={entry} />
         </div>
-        {entry.review && <p className="mt-2 text-sm text-gray-600 leading-relaxed whitespace-pre-line line-clamp-4">{entry.review}</p>}
+        {entry.review && <p className="mt-2 text-sm text-mute leading-relaxed whitespace-pre-line line-clamp-4">{entry.review}</p>}
       </div>
     </a>
   )
@@ -204,23 +198,18 @@ function ListView({ entries }: { entries: DiaryEntry[] }) {
 
   return (
     <div className="space-y-6">
-      {months.map(([key, group], index) => (
-        <motion.section
-          key={key}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: Math.min(index, 5) * 0.06 }}
-          className="bg-white rounded-2xl shadow-lg p-3 sm:p-4"
-        >
-          <h2 className="px-3 sm:px-4 pt-2 pb-1 text-sm font-semibold uppercase tracking-wider text-gray-500">
-            {monthLabel(parseDate(`${key}-01`))}
+      {months.map(([key, group]) => (
+        <section key={key} className="border-2 border-ink">
+          <h2 className="bg-ink text-paper font-mono text-xs uppercase tracking-wider px-4 py-2 flex justify-between">
+            <span>{monthLabel(parseDate(`${key}-01`))}</span>
+            <span>{group.length}</span>
           </h2>
-          <div className="divide-y divide-gray-100">
+          <div className="divide-y-2 divide-ink/10">
             {group.map((entry) => (
               <EntryRow key={entry.id} entry={entry} />
             ))}
           </div>
-        </motion.section>
+        </section>
       ))}
     </div>
   )
@@ -264,33 +253,33 @@ function CalendarView({ entries }: { entries: DiaryEntry[] }) {
 
   return (
     <div className="space-y-6">
-      <div className="bg-white rounded-2xl shadow-lg p-3 sm:p-6">
-        <div className="flex items-center justify-between mb-4">
+      <div className="border-2 border-ink">
+        <div className="flex items-stretch justify-between border-b-2 border-ink">
           <button
             onClick={() => shift(-1)}
             disabled={!canPrev}
             aria-label="Previous month"
-            className="p-2 rounded-lg text-gray-600 hover:bg-orange-50 hover:text-blue-600 disabled:opacity-30 disabled:hover:bg-transparent"
+            className="px-5 font-mono text-lg border-r-2 border-ink hover:bg-ink hover:text-paper disabled:opacity-25 disabled:hover:bg-transparent disabled:hover:text-ink transition-colors"
           >
-            <FaChevronLeft />
+            ←
           </button>
-          <div className="text-center">
-            <div className="text-lg sm:text-xl font-bold text-gray-800">{monthLabel(month)}</div>
-            <div className="text-xs text-gray-500">{monthCount} {monthCount === 1 ? 'film' : 'films'}</div>
+          <div className="text-center py-3">
+            <div className="text-xl sm:text-2xl font-extrabold tracking-tight">{monthLabel(month)}</div>
+            <div className="font-mono text-xs text-mute">{monthCount} {monthCount === 1 ? 'film' : 'films'}</div>
           </div>
           <button
             onClick={() => shift(1)}
             disabled={!canNext}
             aria-label="Next month"
-            className="p-2 rounded-lg text-gray-600 hover:bg-orange-50 hover:text-blue-600 disabled:opacity-30 disabled:hover:bg-transparent"
+            className="px-5 font-mono text-lg border-l-2 border-ink hover:bg-ink hover:text-paper disabled:opacity-25 disabled:hover:bg-transparent disabled:hover:text-ink transition-colors"
           >
-            <FaChevronRight />
+            →
           </button>
         </div>
 
-        <div className="grid grid-cols-7 gap-1 sm:gap-2">
+        <div className="grid grid-cols-7 gap-1 sm:gap-2 p-2 sm:p-4">
           {WEEKDAYS.map((d) => (
-            <div key={d} className="text-center text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-gray-400 pb-1">
+            <div key={d} className="text-center font-mono text-[10px] sm:text-xs uppercase tracking-wider text-mute pb-1">
               {d}
             </div>
           ))}
@@ -305,21 +294,20 @@ function CalendarView({ entries }: { entries: DiaryEntry[] }) {
                 onClick={() => films.length && setSelected(isSelected ? null : iso)}
                 disabled={!films.length}
                 aria-label={`${day.toDateString()}: ${films.length} ${films.length === 1 ? 'film' : 'films'}`}
-                className={`relative aspect-[2/3] rounded-md sm:rounded-lg overflow-hidden text-left transition-all ${
-                  films.length ? 'cursor-pointer hover:-translate-y-0.5 hover:shadow-lg' : 'bg-gray-50'
-                } ${isSelected ? 'ring-2 ring-orange-500 ring-offset-2' : ''}`}
+                className={`relative aspect-[2/3] overflow-hidden text-left transition-all ${
+                  films.length ? 'cursor-pointer border-2 border-ink hover:-translate-x-[2px] hover:-translate-y-[2px] hover:shadow-hard' : 'bg-paper-2'
+                } ${isSelected ? 'outline-3 outline-coral outline-offset-2' : ''}`}
               >
                 {films[0]?.poster && <img src={films[0].poster} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />}
-                {films.length > 0 && <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-transparent to-transparent" />}
                 <span
-                  className={`absolute top-1 left-1.5 text-[10px] sm:text-xs font-semibold ${
-                    films.length ? 'text-white' : iso === today ? 'text-orange-600' : 'text-gray-400'
+                  className={`absolute top-0 left-0 font-mono text-[10px] sm:text-xs font-semibold px-1 ${
+                    films.length ? 'bg-ink text-paper' : iso === today ? 'bg-coral text-ink m-0.5' : 'text-mute m-0.5'
                   }`}
                 >
                   {day.getDate()}
                 </span>
                 {films.length > 1 && (
-                  <span className="absolute bottom-1 right-1 text-[10px] sm:text-xs font-bold bg-white/90 text-gray-800 rounded px-1">
+                  <span className="absolute bottom-0 right-0 font-mono text-[10px] sm:text-xs font-bold bg-coral text-ink px-1">
                     +{films.length - 1}
                   </span>
                 )}
@@ -329,27 +317,18 @@ function CalendarView({ entries }: { entries: DiaryEntry[] }) {
         </div>
       </div>
 
-      <AnimatePresence mode="wait">
-        {selectedEntries.length > 0 && selected && (
-          <motion.section
-            key={selected}
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="bg-white rounded-2xl shadow-lg p-3 sm:p-4"
-          >
-            <h2 className="px-3 sm:px-4 pt-2 pb-1 text-sm font-semibold uppercase tracking-wider text-gray-500">
+      {selectedEntries.length > 0 && selected && (
+          <section className="border-2 border-ink">
+            <h2 className="bg-ink text-paper font-mono text-xs uppercase tracking-wider px-4 py-2">
               {parseDate(selected).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
             </h2>
-            <div className="divide-y divide-gray-100">
+            <div className="divide-y-2 divide-ink/10">
               {selectedEntries.map((entry) => (
                 <EntryRow key={entry.id} entry={entry} showDate={false} />
               ))}
             </div>
-          </motion.section>
+          </section>
         )}
-      </AnimatePresence>
     </div>
   )
 }

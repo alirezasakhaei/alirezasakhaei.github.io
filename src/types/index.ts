@@ -37,6 +37,7 @@ export interface Publication {
 }
 
 export interface Honor {
+  stat?: string
   title: string
   year?: string
   description?: string
@@ -53,7 +54,7 @@ export interface SocialLinks {
 }
 
 export interface Interest {
-  emoji: string
+  emoji?: string
   title: string
   description: string
 }

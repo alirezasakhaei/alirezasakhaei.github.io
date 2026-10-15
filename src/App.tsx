@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import Navigation from './components/Navigation'
-import ProgressBar from './components/ProgressBar'
 import Home from './components/Home'
 import Education from './components/Education'
 import Interests from './components/Interests'
@@ -9,7 +8,6 @@ import Publications from './components/Publications'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { education, interests, experiences, publications, socialLinks } from './data'
-import './App.css'
 
 function App() {
   const [activeSection, setActiveSection] = useState('home')
@@ -45,9 +43,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-pink-50 to-orange-50">
-      <ProgressBar />
-      
+    <div className="min-h-screen">
       <Navigation
         activeSection={activeSection}
         mobileMenuOpen={mobileMenuOpen}

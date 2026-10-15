@@ -57,3 +57,22 @@ export interface Interest {
   title: string
   description: string
 }
+
+export interface DiaryEntry {
+  id: string
+  title: string
+  year: number | null
+  watchedDate: string
+  rating: number | null
+  liked: boolean
+  rewatch: boolean
+  review: string | null
+  poster: string | null
+  url: string
+}
+
+export interface DiaryResponse {
+  username: string
+  profile: string
+  entries: DiaryEntry[]
+}

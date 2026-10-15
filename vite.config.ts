@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { readFileSync, writeFileSync } from 'fs'
 import { join } from 'path'
+import { handleDiary } from './server/letterboxd.js'
 
 // Plugin to remove crossorigin attribute from HTML for GitHub Pages compatibility
 function removeCrossorigin() {
@@ -21,10 +22,20 @@ function removeCrossorigin() {
   }
 }
 
+// Serves /api/letterboxd in `npm run dev`, same handler as the production server.
+function letterboxdApi() {
+  return {
+    name: 'letterboxd-api',
+    configureServer(server: { middlewares: { use: (path: string, fn: typeof handleDiary) => void } }) {
+      server.middlewares.use('/api/letterboxd', handleDiary)
+    },
+  }
+}
+
 // https://vite.dev/config/
 export default defineConfig({
   base: '/',
-  plugins: [react(), removeCrossorigin()],
+  plugins: [react(), removeCrossorigin(), letterboxdApi()],
   build: {
     outDir: 'dist',
     assetsDir: 'assets',

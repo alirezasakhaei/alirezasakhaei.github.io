@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap, FaLinkedin, FaGithub, FaGoogle, FaUniversity, FaHeart } from 'react-icons/fa'
+import { FaBriefcase, FaFileAlt, FaEnvelope, FaHome, FaBars, FaTimes, FaGraduationCap, FaLinkedin, FaGithub, FaGoogle, FaUniversity, FaHeart, FaFilm } from 'react-icons/fa'
 import { socialLinks } from '../data'
 
 interface NavigationProps {
@@ -68,6 +68,13 @@ export default function Navigation({ activeSection, mobileMenuOpen, setMobileMen
                 <span className="hidden lg:inline">{label}</span>
               </button>
             ))}
+            <a
+              href="/movies"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg transition-all text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+            >
+              <FaFilm className="w-4 h-4" />
+              <span className="hidden lg:inline">Movies</span>
+            </a>
           </div>
 
           {/* Mobile Menu Button */}
@@ -111,6 +118,13 @@ export default function Navigation({ activeSection, mobileMenuOpen, setMobileMen
                   <span>{label}</span>
                 </button>
               ))}
+              <a
+                href="/movies"
+                className="w-full flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-50 text-left"
+              >
+                <FaFilm />
+                <span>Movies</span>
+              </a>
             </div>
           </motion.div>
         )}

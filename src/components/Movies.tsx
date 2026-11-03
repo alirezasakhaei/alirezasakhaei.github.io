@@ -41,7 +41,7 @@ export default function Movies() {
 
   useEffect(() => {
     document.title = 'Movies · Alireza Sakhaeirad'
-    fetch('/api/letterboxd')
+    fetch('/api/letterboxd.json')
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .then(setData)
       .catch(() => setError(true))

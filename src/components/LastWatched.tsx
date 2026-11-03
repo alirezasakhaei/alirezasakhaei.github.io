@@ -7,7 +7,7 @@ export default function LastWatched() {
   const [latest, setLatest] = useState<DiaryEntry | null>(null)
 
   useEffect(() => {
-    fetch('/api/letterboxd')
+    fetch('/api/letterboxd.json')
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .then((data: DiaryResponse) => setLatest(data.entries[0] ?? null))
       .catch(() => {})

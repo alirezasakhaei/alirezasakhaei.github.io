@@ -1,12 +1,15 @@
-name: Deploy GitHub Pages redirect
+name: Deploy to GitHub Pages
 
-# The canonical site now lives at https://sakha.wtf (deployed on Railway).
-# GitHub Pages only serves a redirect to it, so old alirezasakhaei.github.io links keep working.
+# The site (https://sakha.wtf) is served by GitHub Pages. There is no server, so the Letterboxd
+# diary for /movies is fetched at build time into api/letterboxd.json; the hourly schedule keeps
+# it fresh.
 
 on:
   push:
     branches:
       - main
+  schedule:
+    - cron: "17 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -22,33 +25,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Generate redirect site
-        run: |
-          mkdir -p _site
-          cat > _site/index.html <<'HTML'
-          <!doctype html>
-          <html lang="en">
-            <head>
-              <meta charset="utf-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1" />
-              <title>Redirecting to sakha.wtf</title>
-              <link rel="canonical" href="https://sakha.wtf/" />
-              <meta http-equiv="refresh" content="0; url=https://sakha.wtf/" />
-              <script>
-                window.location.replace("https://sakha.wtf/" + window.location.hash);
-              </script>
-              <style>
-                body { font-family: system-ui, sans-serif; display: grid; place-items: center; min-height: 100vh; margin: 0; }
-                a { color: #2563eb; }
-              </style>
-            </head>
-            <body>
-              <p>This site has moved to <a href="https://sakha.wtf/">sakha.wtf</a>. Redirecting…</p>
-            </body>
-          </html>
-          HTML
-          cp _site/index.html _site/404.html
-          touch _site/.nojekyll
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: Fetch Letterboxd data
+        run: npm run build:data
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -56,7 +45,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: './_site'
+          path: ./dist
 
   deploy:
     environment:

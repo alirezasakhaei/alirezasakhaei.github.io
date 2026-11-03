@@ -14,7 +14,8 @@ let watchlistCache = { at: 0, films: null }
 const posters = new Map()
 
 function tag(xml, name) {
-  const m = xml.match(new RegExp(`<${name}>([\\s\\S]*?)</${name}>`))
+  // Tags may carry attributes (e.g. <guid isPermaLink="false">).
+  const m = xml.match(new RegExp(`<${name}(?:\\s[^>]*)?>([\\s\\S]*?)</${name}>`))
   return m ? decode(m[1].trim()) : null
 }
 
@@ -145,21 +146,25 @@ export async function getWatchlist() {
   return watchlistCache.films
 }
 
+// The /api/letterboxd.json payload. The production build writes it to dist/ as a static file.
+export async function getPayload() {
+  const [entries, watchlist] = await Promise.all([
+    getDiary(),
+    // The watchlist is best-effort: without it the page still shows the diary.
+    getWatchlist().catch((err) => {
+      console.error('Letterboxd watchlist unavailable:', err)
+      return null
+    }),
+  ])
+  return { username: USERNAME, profile: `https://letterboxd.com/${USERNAME}/`, entries, watchlist }
+}
+
+// Serves the payload live in `npm run dev`.
 export async function handleDiary(_req, res) {
   try {
-    const [entries, watchlist] = await Promise.all([
-      getDiary(),
-      // The watchlist is best-effort: without it the page still shows the diary.
-      getWatchlist().catch((err) => {
-        console.error('Letterboxd watchlist unavailable:', err)
-        return null
-      }),
-    ])
-    res.writeHead(200, {
-      'Content-Type': 'application/json; charset=utf-8',
-      'Cache-Control': 'public, max-age=300',
-    })
-    res.end(JSON.stringify({ username: USERNAME, profile: `https://letterboxd.com/${USERNAME}/`, entries, watchlist }))
+    const payload = await getPayload()
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' })
+    res.end(JSON.stringify(payload))
   } catch (err) {
     console.error('Letterboxd diary unavailable:', err)
     res.writeHead(502, { 'Content-Type': 'application/json; charset=utf-8' })

@@ -15,6 +15,9 @@ function removeCrossorigin() {
         // Remove crossorigin attribute from script and link tags
         html = html.replace(/\s+crossorigin/g, '')
         writeFileSync(htmlPath, html, 'utf-8')
+        // GitHub Pages has no server-side routing: unknown paths (/movies, …) get 404.html,
+        // so it carries the app shell and the client router takes over.
+        writeFileSync(join(__dirname, 'dist', '404.html'), html, 'utf-8')
       } catch (error) {
         console.warn('Could not modify HTML file:', error)
       }
@@ -22,12 +25,12 @@ function removeCrossorigin() {
   }
 }
 
-// Serves /api/letterboxd in `npm run dev`, same handler as the production server.
+// Serves /api/letterboxd.json live in `npm run dev`; production builds it as a static file.
 function letterboxdApi() {
   return {
     name: 'letterboxd-api',
     configureServer(server: { middlewares: { use: (path: string, fn: typeof handleDiary) => void } }) {
-      server.middlewares.use('/api/letterboxd', handleDiary)
+      server.middlewares.use('/api/letterboxd.json', handleDiary)
     },
   }
 }
